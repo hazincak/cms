@@ -1,0 +1,8 @@
+.pager li .active_link{
+    background: #0275d8;
+    color: #fff;
+}
+.pager li .active_link:hover{
+    background: #0275d8;
+    color: #fff;
+}
