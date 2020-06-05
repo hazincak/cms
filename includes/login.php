@@ -26,7 +26,7 @@ if(!$select_user_query){
     }
     $password = crypt($password, $db_user_password);
 
-    if($username === $db_username && $password === $db_user_password){
+    if($username === $db_username && $password === $db_user_password && $db_user_role =='admin'){
         $_SESSION['username'] = $db_username;
         $_SESSION['firstname'] = $db_user_firstname;
         $_SESSION['lastname'] = $db_user_lastname;
@@ -34,6 +34,13 @@ if(!$select_user_query){
         $_SESSION['user_id'] = $db_user_id;
 
         header ("Location: ../admin");
+    }elseif($username === $db_username && $password === $db_user_password && $db_user_role =='subscriber'){
+        $_SESSION['username'] = $db_username;
+        $_SESSION['firstname'] = $db_user_firstname;
+        $_SESSION['lastname'] = $db_user_lastname;
+        $_SESSION['user_role'] = $db_user_role;
+        $_SESSION['user_id'] = $db_user_id;
+        header ("Location: ../index.php?logged");
     }else{
         header ("Location: ../index.php");
     }

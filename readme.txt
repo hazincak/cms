@@ -13,3 +13,5 @@ All created posts are processed as drafts and are displayed on the website only 
 after the admins approval. 
 
 This website uses a free, open source, MIT licensed Bootstrap admin template from: https://startbootstrap.com/templates/sb-admin/
+
+   

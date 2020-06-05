@@ -26,6 +26,27 @@
                     ?>
                     <li><a href="registration.php">Registration</a></li>
 <?php
+if(isset($_SESSION['username'])){
+    echo " <li class='dropdown'>
+    <a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> '{$_SESSION['username']}' <b class='caret'></b></a>
+    <ul class='dropdown-menu'>
+        <li>
+            <a href='#'><i class='fa fa-fw fa-user'></i> Profile</a>
+        </li>
+        <li class='divider'></li>
+        <li>
+            <a href='includes/logout.php'><i class='fa fa-fw fa-power-off'></i> Log Out</a>
+        </l";
+}
+
+?>
+                
+                    </ul>
+                </li>
+               
+
+                </li>
+<?php
 if(isset($_SESSION['user_role'])){
     if(isset($_GET['p_id'])){
        $the_post_id = $_GET['p_id'];
@@ -36,7 +57,9 @@ if(isset($_SESSION['user_role'])){
 ?>
                     
                 </ul>
+
             </div>
+          
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->

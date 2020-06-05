@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+<?php session_start(); ?>
 <?php include "includes/db.php" ?>
 <?php include  "includes/header.php" ?>
     <!-- Navigation -->
@@ -24,7 +26,7 @@ if($page == "" || $page == 1){
     $page_1 = ($page * $per_page) - $per_page;
 }
 ?>
-            <h1> Page number: <?php echo $page ?></h1>
+            <h1> Page: <?php echo $page ?></h1>
 <?php 
     $post_query_count = "SELECT * FROM posts";
     $find_count = mysqli_query($connection, $post_query_count);
@@ -44,9 +46,6 @@ if($page == "" || $page == 1){
 
         if($post_status == 'published'){
 
-        
-
-        
 ?>
                         <!-- First Blog Post -->
                         <h2>
