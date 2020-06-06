@@ -32,14 +32,25 @@ if(!$select_user_query){
         $_SESSION['lastname'] = $db_user_lastname;
         $_SESSION['user_role'] = $db_user_role;
         $_SESSION['user_id'] = $db_user_id;
+        $_SESSION['password_err'] ='';
 
         header ("Location: ../admin");
-    }elseif($username === $db_username && $password === $db_user_password && $db_user_role =='subscriber'){
+    }elseif($username === $db_username && $password != $db_user_password){
+        
+        $_SESSION['password_err'] = "Invalid password";
+        header ("Location: ../index.php");
+
+    }
+    
+    
+    
+    elseif($username === $db_username && $password === $db_user_password && $db_user_role =='subscriber'){
         $_SESSION['username'] = $db_username;
         $_SESSION['firstname'] = $db_user_firstname;
         $_SESSION['lastname'] = $db_user_lastname;
         $_SESSION['user_role'] = $db_user_role;
         $_SESSION['user_id'] = $db_user_id;
+        $_SESSION['password_err'] ='';
         header ("Location: ../index.php?logged");
     }else{
         header ("Location: ../index.php");

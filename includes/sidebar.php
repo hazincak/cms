@@ -23,7 +23,8 @@
                          
                      </div>
                      <div class="input-group">
-                         <input name="password" type="password" class="form-control" placeholder = "Enter Password">
+                         <input name="password" type="password" class="form-control <?php echo (!empty($_SESSION['password_err'])) ? 'is-invalid' : ''; ?>" placeholder = "Enter Password">
+                         <span class='invalid-feedback'><?php echo $_SESSION['password_err'] ?></span>
                          <span class="input-group-btn">
                              <button name="login" class="btn btn-primary" type="submit">Submit</button>
                          </span>
