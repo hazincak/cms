@@ -19,17 +19,19 @@
                  <h4>Login</h4>
                  <form action="includes/login.php" method="post">
                      <div class="form-group">
-                         <input name="username" type="text" class="form-control" placeholder = "Enter Username">
-                         
+                         <input name="username" type="text" class="form-control <?php echo (!empty($_SESSION['username_err'])) ? 'is-invalid' : ''; ?>" placeholder = "Enter Username">
+                         <span class='invalid-feedback'><?php echo $_SESSION['username_err'] ?></span>
                      </div>
-                     <div class="input-group">
+                     <div class="form-group">
                          <input name="password" type="password" class="form-control <?php echo (!empty($_SESSION['password_err'])) ? 'is-invalid' : ''; ?>" placeholder = "Enter Password">
                          <span class='invalid-feedback'><?php echo $_SESSION['password_err'] ?></span>
-                         <span class="input-group-btn">
-                             <button name="login" class="btn btn-primary" type="submit">Submit</button>
-                         </span>
                      </div>
-                  
+                        <div class="col">
+                            <button name="login" value ="Login" class = "btn btn-success btn-block">Login</button>
+                        </div>
+                        <div class="col">
+                            <a href="registration.php" class = "btn btn-light btn-block">No account? Register</a>
+                        </div>
                  </form>
                  <!-- /.input-group -->
              </div>
