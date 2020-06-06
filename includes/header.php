@@ -23,4 +23,3 @@
 </head>
 
 <body>
-<p>Test</p>
