@@ -15,6 +15,7 @@
 
    
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/blog-home.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
 
@@ -22,4 +23,3 @@
 </head>
 
 <body>
-<p>hello</p>
