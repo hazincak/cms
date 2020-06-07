@@ -26,7 +26,10 @@ if($page == "" || $page == 1){
     $page_1 = ($page * $per_page) - $per_page;
 }
 ?>
-            <h1> Page: <?php echo $page ?></h1>
+<?php if(isset($_GET['page'])){       
+    echo "<h3 class='text-center'> Page: {$page} </h3>";
+}
+?>
 <?php 
     $post_query_count = "SELECT * FROM posts";
     $find_count = mysqli_query($connection, $post_query_count);

@@ -109,7 +109,7 @@ if(isset($_POST['checkBoxArray'])){
     </form>
 <?php
 if(isset($_GET['delete'])){
-    $the_post_id = $_GET['delete'];
+    $the_post_id = escape($_GET['delete']);
 
     $query = "DELETE FROM posts where post_id = {$the_post_id}";
     $delete_query = mysqli_query($connection, $query);

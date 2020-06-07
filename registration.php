@@ -2,6 +2,22 @@
 <?php  include "includes/header.php"; ?>
 <?php
 if(isset($_POST['submit'])){
+    $message = "";
+    $username_err = "";
+    $query = "SELECT * FROM users";
+    $select_users_query = mysqli_query($connection, $query);
+    if(!$select_users_query){
+        die("QUERY FAILED". mysqli_error($connection));
+    }
+
+    while($row = mysqli_fetch_array($select_users_query)){
+        $db_username = $row['username'];
+        if($db_username == $_POST['username']){
+            $username_err = "Username: '{$db_username}' already exists";
+        }
+    }
+
+   if(empty($username_err)){
     $username = $_POST['username'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -42,6 +58,9 @@ if(isset($_POST['submit'])){
 }else{
     $message = " ";
 }
+   }
+    
+ 
 ?>
 
     <!-- Navigation -->
@@ -59,10 +78,11 @@ if(isset($_POST['submit'])){
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <h6 class = "text-center"><?php echo $message?></h6>
+                        <h6 class = "text-center"><?php if(isset($message)){echo $message;} ?></h6>
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
+                            <input type="text" name="username" id="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" placeholder="Enter Desired Username">
+                            <span class='invalid-feedback'><?php echo $username_err ?></span>
                         </div>
                         <div class="form-group">
                             <label for="username" class="sr-only">firstname</label>

@@ -77,11 +77,14 @@ if(isset($_GET['change_to_sub'])){
 ?>
 <?php
 if(isset($_GET['delete_user'])){
-    $the_user_id = $_GET['delete_user'];
+
+    if(isset($_SESSION['user_role'])){
+        $the_user_id = mysqli_real_escape_string($connection,  $_GET['delete_user']);
 
     $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
     $delete_user_query = mysqli_query($connection, $query);
     header("Location: users.php");
     confirm($delete_query);
+    }
 } 
 ?>
