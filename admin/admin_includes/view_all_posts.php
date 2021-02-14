@@ -62,12 +62,12 @@ if(isset($_POST['checkBoxArray'])){
 
         <?php
              global $connection;
-             $query = "SELECT * FROM posts";
+             $query = "SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.post_user_id=users.user_id";
              $select_posts = mysqli_query($connection, $query);
 
               while($row = mysqli_fetch_assoc($select_posts)){
                 $post_id = $row['post_id'];
-                $post_author = $row['post_author'];
+                $post_author = $row['username'];
                 $post_title = $row['post_title'];
                 $post_category_id = $row['post_category_id'];
                 $post_date = $row['post_date'];

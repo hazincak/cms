@@ -15,14 +15,12 @@ if(isset($_GET['category'])){
     $post_category_id = $_GET['category'];
     $post_category_name = $_GET['category_name'];
 }
-
-
-                        $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id";
+                        $query = "SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.post_user_id=users.user_id WHERE post_category_id = $post_category_id";
                         $select_all_posts_query = mysqli_query($connection, $query);
                         while($row = mysqli_fetch_assoc($select_all_posts_query)){
                             $post_title = $row["post_title"];
                             $post_id = $row["post_id"];
-                            $post_author = $row["post_author"];
+                            $post_author = $row["username"];
                             $post_date = $row["post_date"];
                             $post_image = $row["post_image"];
                             $post_content = substr($row["post_content"],0,150);

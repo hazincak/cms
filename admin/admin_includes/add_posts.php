@@ -2,7 +2,7 @@
 
 if(isset($_POST['create_post'])){
     $post_title = escape($_POST['title']);
-    $post_author = escape($_POST['author']);
+    $post_author_id = $_SESSION['user_id'];
     $post_category_id = escape($_POST['post_category']);
     $post_status = escape( $_POST['post_status']);
     
@@ -16,8 +16,8 @@ if(isset($_POST['create_post'])){
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
-    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status)";
-    $query .= "VALUES('{$post_category_id}','{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
+    $query = "INSERT INTO posts(post_category_id, post_title, post_user_id, post_date, post_image, post_content, post_tags, post_status)";
+    $query .= "VALUES('{$post_category_id}','{$post_title}','{$post_author_id}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
 
     $create_post_query = mysqli_query($connection, $query);
 
@@ -52,10 +52,10 @@ if(isset($_POST['create_post'])){
 
                     </select>            
         </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for ="post_author">Post Author</label>
             <input type ="text" class="form-control" name="author">
-    </div>
+    </div> -->
     <div class="form-group">
         <label for ="post_status">Post Status</label>
         <select name = "post_status">

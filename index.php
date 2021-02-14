@@ -26,22 +26,23 @@ if($page == "" || $page == 1){
     $page_1 = ($page * $per_page) - $per_page;
 }
 ?>
-<?php if(isset($_GET['page'])){       
-    echo "<h3 class='text-center'> Page: {$page} </h3>";
-}
-?>
+
+
+
 <?php 
     $post_query_count = "SELECT * FROM posts";
     $find_count = mysqli_query($connection, $post_query_count);
     $count = mysqli_num_rows($find_count);
     $count = ceil($count / $per_page);
 
-    $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
+    // $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
+    $query = "SELECT posts.*, users.user_id, users.username FROM posts INNER JOIN users ON posts.post_user_id=users.user_id LIMIT $page_1, $per_page";
     $select_all_posts_query = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_all_posts_query)){
         $post_title = $row["post_title"];
         $post_id = $row["post_id"];
-        $post_author = $row["post_author"];
+        $post_author_id = $row['user_id'];
+        $post_author = $row["username"];
         $post_date = $row["post_date"];
         $post_image = $row["post_image"];
         $post_content = substr($row["post_content"],0,150);
@@ -55,7 +56,7 @@ if($page == "" || $page == 1){
                             <a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title?></a>
                         </h2>
                         <p class="lead">
-                            by <a href="author_posts.php?author=<?php echo $post_author?>&p_id=<?php echo $post_id;?>"><?php echo $post_author?></a>
+                            by <a href="author_posts.php?author=<?php echo $post_author?>&user_id=<?php echo $post_author_id?>&p_id=<?php echo $post_id;?>"><?php echo $post_author?></a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span><?php echo $post_date?></p>
                         <hr>
