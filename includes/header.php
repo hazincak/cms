@@ -5,6 +5,10 @@
 
 <head>
 
+<?php ob_start(); ?>
+<?php session_start(); ?>
+<?php include "functions.php"; ?>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +22,12 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/blog-home.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-    
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
+
+
 
 </head>
 

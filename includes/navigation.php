@@ -31,7 +31,13 @@ if(isset($_SESSION['username'])){
     <a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> '{$_SESSION['username']}' <b class='caret'></b></a>
     <ul class='dropdown-menu'>
         <li>
-            <a href='#'><i class='fa fa-fw fa-user'></i> Profile</a>
+            <a href='userOptions.php?source=profile'><i class='fa fa-fw fa-user'></i> Profile</a>
+        </li>
+        <li>
+            <a href='userOptions.php?source=all_posts'><i class='fa fa-fw fa-user'></i> My posts</a>
+        </li>
+        <li>
+            <a href='userOptions.php?source=create_post'><i class='fa fa-fw fa-user'></i> Add post</a>
         </li>
         <li class='divider'></li>
         <li>
