@@ -16,28 +16,25 @@
                             Posts
                             <small>Logged in as:&nbsp<?php echo $_SESSION['username'] ?></small>
                         </h1>
-<?php
-if(isset($_GET['source'])){
-    $source = $_GET['source'];
-}else{
-    $source = "";
-}
-
-switch($source){
-    case'add_post':
-        include "admin_includes/add_posts.php";
-    break;
-    case'edit_post':
-        include "admin_includes/edit_post.php";
-    break;
-    default: 
-    include "admin_includes/view_all_posts.php";
-break;
-}
-
-
-
-?>
+                        <?php
+                        if(isset($_GET['source'])){
+                            $source = $_GET['source'];
+                        }else{
+                            $source = "";
+                        }
+                
+                        switch($source){
+                            case'add_post':
+                                include "admin_includes/add_posts.php";
+                            break;
+                            case'edit_post':
+                                include "admin_includes/edit_post.php";
+                            break;
+                            default: 
+                            include "admin_includes/view_all_posts.php";
+                        break;
+                        }
+                        ?>
                     </div>
                 </div>
                 <!-- /.row -->

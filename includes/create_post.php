@@ -22,7 +22,7 @@ if(isset($_POST['create_draft_post'])){
 
     confirm($create_post_query);
     $the_post_id = mysqli_insert_id($connection);//pulls out last created ID.
-    echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='posts.php'>Add More Posts</a></p>";
+    echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='userOptions.php?source=create_post'>Add More Posts</a></p>";
 }
 
 ?>

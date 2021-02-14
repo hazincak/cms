@@ -17,7 +17,7 @@ while($row = mysqli_fetch_array($select_user_profile_query)){
     $user_email = $row['user_email'];
     // $user_image = $row['user_image'];
     $user_role = $row['user_role'];
-}
+    }
 }
 ?>
 <?php 
