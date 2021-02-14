@@ -65,45 +65,44 @@ if(isset($_POST['update_user'])){
                     </div>
                 </div>
                 <form action="" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for ="post_author">Firstname</label>
-                <input type ="text" class="form-control" value="<?php echo $user_firstname ?>" name="user_firstname">
-        </div>
-        <div class="form-group">
-            <label for ="post_status">Lastname</label>
-                <input type ="text" class="form-control" value="<?php echo $user_lastname ?>" name="user_lastname">
-        </div>
-    
-        <div class="form-group">
-                <select name="user_role" id="">
-                   <option value="subscriber"><?php echo $user_role; ?></option>
-<?php
-if($user_role =="admin"){
-    echo "<option value'subscriber'>subscriber</option>";
-}else{
-    echo "<option value = 'admin'>admin</option>";
-}
+                    <div class="form-group">
+                        <label for ="post_author">Firstname</label>
+                            <input type ="text" class="form-control" value="<?php echo $user_firstname ?>" name="user_firstname">
+                    </div>
+                    <div class="form-group">
+                        <label for ="post_status">Lastname</label>
+                            <input type ="text" class="form-control" value="<?php echo $user_lastname ?>" name="user_lastname">
+                    </div>
 
-?>
-                </select>            
-        </div>
-        <div class="form-group">
-            <label for ="post_tags">Username</label>
-                <input type ="text" class="form-control" value="<?php echo $username ?>" name="username">
-        </div>
-        <div class="form-group">
-            <label for ="post_tags">Email</label>
-                <input type ="email" class="form-control" value="<?php echo $user_email ?>" name="user_email">
-        </div>
-        <div class="form-group">
-            <label for ="post_tags">Password</label>
-                <input type ="password" class="form-control" value="<?php echo $user_password ?>" name="user_password">
-        </div>
-    
-        <div class="form-group">
-            <div><input class="btn btn-primary" type="submit" name="update_user" value="Update Profile"></div>
-        </div>
-</form>
+                    <div class="form-group">
+                            <select name="user_role" id="">
+                               <option value="subscriber"><?php echo $user_role; ?></option>
+                        <?php
+                        if($user_role =="admin"){
+                            echo "<option value'subscriber'>subscriber</option>";
+                        }else{
+                            echo "<option value = 'admin'>admin</option>";
+                        }
+                        ?>
+                            </select>            
+                    </div>
+                        <div class="form-group">
+                            <label for ="post_tags">Username</label>
+                                <input type ="text" class="form-control" value="<?php echo $username ?>" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for ="post_tags">Email</label>
+                                <input type ="email" class="form-control" value="<?php echo $user_email ?>" name="user_email">
+                        </div>
+                        <div class="form-group">
+                            <label for ="post_tags">Password</label>
+                                <input type ="password" class="form-control" value="<?php echo $user_password ?>" name="user_password">
+                        </div>
+                                    
+                        <div class="form-group">
+                            <div><input class="btn btn-primary" type="submit" name="update_user" value="Update Profile"></div>
+                        </div>
+                </form>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
