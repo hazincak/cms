@@ -1,4 +1,5 @@
  <!-- Page Heading -->
+ <?php include "modals/delete_comment_modal.php" ?>
  <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
@@ -56,7 +57,8 @@
                             echo "<td>{$comment_date}</td>";
                             echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";      
                             echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";    
-                            echo "<td><a href='comments.php?delete_comment=$comment_id'>Delete</a></td>";   
+                            echo "<td><a rel='$comment_id' href='javascript:void(0)' class='js--delete-comment-link' >Delete</a></td>";
+                            // echo "<td><a href='comments.php?delete_comment=$comment_id'>Delete</a></td>";   
                         echo "</tr>";
       }
 ?>
@@ -94,3 +96,14 @@ if(isset($_GET['delete_comment'])){
     confirm($delete_query);
 } 
 ?>
+
+<script>
+    $(document).ready(function(){
+        $('.js--delete-comment-link').on('click', function(){
+            var id = $(this).attr("rel");
+            var delete_path = `comments.php?delete_comment=${id}`;
+            $('.js--modal_delete_comment_link').attr("href", delete_path);
+            $('#deleteCommentModalAdmin').modal('show')
+        })
+    });
+</script>

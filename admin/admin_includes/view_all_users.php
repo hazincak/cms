@@ -47,7 +47,8 @@
                             echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to make this user admin?');\" href='users.php?change_to_admin={$user_id}'>Admin</a></td>";      
                             echo "<td><a href='users.php?change_to_sub={$user_id}'>Subscriber</a></td>";
                             echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";       
-                            echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user?');\" href='users.php?delete_user={$user_id}'>Delete</a></td>";   
+                            echo "<td><a rel='$user_id' href='javascript:void(0)' class='js--delete-user-link' >Delete</a></td>";
+                            // echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user?');\" href='users.php?delete_user={$user_id}'>Delete</a></td>";   
                         echo "</tr>";
       }
 ?>
@@ -56,6 +57,9 @@
                         </tbody>
                         </table>
 <?php
+
+include('modals/delete_user_modal.php');
+
 if(isset($_GET['change_to_admin'])){
     $the_user_id = $_GET['change_to_admin'];
 
@@ -88,3 +92,15 @@ if(isset($_GET['delete_user'])){
     }
 } 
 ?>
+
+<script>
+    $(document).ready(function(){
+        $('.js--delete-user-link').on('click', function(){
+            var id = $(this).attr("rel");
+            var delete_path = `users.php?delete_user=${id}`;
+            
+            $('.js--modal_delete_user_link').attr("href", delete_path);
+            $('#deleteUserModalAdmin').modal('show')
+        })
+    });
+</script>
