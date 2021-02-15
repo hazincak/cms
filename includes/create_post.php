@@ -1,5 +1,6 @@
 <?php
 if(isset($_POST['create_draft_post'])){
+
     $post_title = escape($_POST['title']);
     $post_author_id = $_SESSION['user_id'];
     $post_category_id = escape($_POST['post_category']);
@@ -22,8 +23,33 @@ if(isset($_POST['create_draft_post'])){
 
     confirm($create_post_query);
     $the_post_id = mysqli_insert_id($connection);//pulls out last created ID.
+    
+    // Count total files
+    $countfiles = count($_FILES['file']['name']);
+    // Looping all files
+    for($i=0;$i<$countfiles;$i++){
+    $filename = $_FILES['file']['name'][$i];
+    
+    // Upload file
+    move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
+     
+    $query = "INSERT INTO images (image_path, image_post_id)";
+    $query .= "VALUES('{$filename}','{$the_post_id}')";
+
+    $attach_image_query = mysqli_query($connection, $query);
+
+    confirm($attach_image_query);
+
+  }
+    
+    
+    
     echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='userOptions.php?source=create_post'>Add More Posts</a></p>";
 }
+
+
+  
+ 
 
 ?>
 
@@ -50,12 +76,17 @@ if(isset($_POST['create_draft_post'])){
       </select>
     </div>
     <div class="form-group">
-      <label for ="image">Post Image</label>
+      <label for ="image">Post image</label>
       <input type ="file" class="form-control-file" name="image">
     </div>
+    <div class="form-group js--image-container">
+      <label for ="file[]">Post image</label>
+        <input type="file" name="file[]"/>
+    </div>
+    <button type="button" class="js--add-image-button">Add image</button>
     <div class="form-group">
         <label for ="post_tags">Post Tags</label>
-            <div><input type ="text" class="form-control" name="post_tags"></div>
+        <div><input type ="text" class="form-control" name="post_tags"></div>
     </div>
     <div class = "form-group">
         <label for ="post_content">Post Content</label>
@@ -63,3 +94,13 @@ if(isset($_POST['create_draft_post'])){
     </div>
     <button type="submit" name="create_draft_post" class="btn btn-primary">Submit</button>
 </form>
+
+
+
+<script>
+   $(document).ready( function() {
+$('.js--add-image-button').click(function(){
+  $('.js--image-container').append('<input type="file" name="file[]"/>')
+});
+   })
+</script>

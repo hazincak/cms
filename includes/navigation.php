@@ -28,10 +28,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php
-                        if(!isset($_SESSION['username'])){
-                            if($_SESSION['user_role'] =='admin'){
-                                echo "<li><a href='registration.php'>Registration</a></li>";
-                            }
+                        if(!isset($_SESSION['logged_in'])){
+                            echo "<li><a href='registration.php'>Registration</a></li>";
                         };
                         if(isset($_SESSION['username'])){
                             echo " <li class='dropdown'>
