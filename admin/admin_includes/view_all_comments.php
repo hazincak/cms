@@ -1,20 +1,12 @@
  <!-- Page Heading -->
  <?php include "modals/delete_comment_modal.php" ?>
- <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Comments
-                            <small><?php echo $_SESSION['username'] ?></small>
-                        </h1>
-                    </div>
-                </div>
+
 <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Author</th>
+                                    <th>Author username</th>
                                     <th>Comment</th>
-                                    <th>Email</th>
                                     <th>Status</th>
                                     <th>In Response to</th>
                                     <th>Date</th>
@@ -27,23 +19,21 @@
                             
 <?php
      global $connection;
-     $query = "SELECT * FROM comments";
+     $query = "SELECT comments.*, users.user_id, users.username FROM comments INNER JOIN users ON comments.comment_user_id=users.user_id";
      $select_comments = mysqli_query($connection, $query);
  
       while($row = mysqli_fetch_assoc($select_comments)){
         $comment_id = $row['comment_id'];
         $comment_post_id = $row['comment_post_id'];
-        $comment_author = $row['comment_author'];
-        $comment_content = $row['comment_content'];
-        $comment_email = $row['comment_email'];      
+        $comment_user_username = $row['username'];
+        $comment_content = $row['comment_content'];  
         $comment_status = $row['comment_status'];
         $comment_date = $row['comment_date'];
         
                         echo "<tr>";
                             echo "<td>{$comment_id}</td>";
-                            echo "<td>{$comment_author}</td>";   
+                            echo "<td>{$comment_user_username}</td>";   
                             echo "<td>{$comment_content}</td>";
-                            echo "<td>{$comment_email}</td>";
                             echo "<td>{$comment_status}</td>";     
     $query = "SELECT * FROM posts WHERE post_id={$comment_post_id}";
     $select_posts_id = mysqli_query($connection, $query);
