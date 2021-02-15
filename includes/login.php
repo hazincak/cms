@@ -32,6 +32,7 @@ if(!$select_user_query){
         $_SESSION['lastname'] = $db_user_lastname;
         $_SESSION['user_role'] = $db_user_role;
         $_SESSION['user_id'] = $db_user_id;
+        $_SESSION['logged_in'] = 'true';
         $_SESSION['password_err'] ='';
         $_SESSION['username_err'] ='';
 
@@ -50,6 +51,7 @@ if(!$select_user_query){
         $_SESSION['lastname'] = $db_user_lastname;
         $_SESSION['user_role'] = $db_user_role;
         $_SESSION['user_id'] = $db_user_id;
+        $_SESSION['logged_in'] = true;
         $_SESSION['password_err'] ='';
         $_SESSION['username_err'] ='';
         header ("Location: ../index.php?logged");

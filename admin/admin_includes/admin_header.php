@@ -4,11 +4,11 @@
 <?php include "functions.php"; ?>
 
 <?php
-if(isset($_SESSION['user_role'])){
-if($_SESSION['user_role'] !=='admin'){
+
+if($_SESSION['user_role'] !=='admin' && $_SESSION['logged_in'] !=='true'){
     header("Location: ../index.php");
 }
-}
+
 // if(!isset($_SESSION['user_role'])){
     
 //     header("Location: ../index.php");
