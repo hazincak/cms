@@ -55,10 +55,10 @@ if(isset($_POST['create_draft_post'])){
 
 
 
-<h3>Create post</h3>
+<h3>Create recipe</h3>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="post_title">Post title</label>
+      <label for="post_title">Recipe title</label>
       <input type="text" class="form-control" id="post_title" name="title"  placeholder="Enter title">
     </div>
     <div class="form-group">
@@ -76,31 +76,125 @@ if(isset($_POST['create_draft_post'])){
       </select>
     </div>
     <div class="form-group">
-      <label for ="image">Post image</label>
+      <label for ="image">Recipe main image</label>
       <input type ="file" class="form-control-file" name="image">
     </div>
-    <div class="form-group js--image-container">
-      <label for ="file[]">Post image</label>
-        <input type="file" name="file[]"/>
+    <div class="form-group js--image-block">
+      <label for="file">Recipe images</label>
+      <input type="file" class="form-control-file mb-2" name="file[]"/>
     </div>
-    <button type="button" class="js--add-image-button">Add image</button>
+    <button type="button" class="btn btn-secondary btn-sm js--add-image-button"><i class="fas fa-plus"></i>Add image</button>
+    <hr>
+    <div class="row js--ingredients-block">
+        <div class="col-md-2 form-group">
+            <label for="ingredient['quantity']" >Amount</label>
+            <input 
+                type="text" 
+                rel="tooltip" 
+                title="Examples: 1, 2 or ½ and ¼ " 
+                data-toggle="tooltip" 
+                data-placement="bottom" 
+                class="form-control" 
+                id="ingredient_quantity"  
+                name="ingredient['quantity']" 
+                value="Amount">
+        </div>
+        <div class="col-md-2 form-group">
+            <label for="ingredient['unit']" >Unit</label>
+            <input 
+                type="text" 
+                rel="tooltip" 
+                title="Examples: G, Kg, Cup or Tablespoons" 
+                data-toggle="tooltip" 
+                data-placement="bottom" 
+                class="form-control" 
+                name="ingredient['unit']" 
+                placeholder="Unit">
+        </div>
+        <div class="col-md-8 form-group">
+            <label for="ingredient['description']" >Ingredient description</label>
+            <input 
+              type="text"
+              rel="tooltip" 
+              title="Example: ...warm milk (110 degrees F/45 degrees C)" 
+              data-toggle="tooltip" 
+              data-placement="bottom"  
+              class="form-control" 
+              name="ingredient['description']" 
+              placeholder="Enter description">
+        </div>
+    </div>
+    <div>
+          <button type="button" name="addButton" class="btn btn-success btn-sm js--add-ingredient-button"><i class="fas fa-plus"></i>&nbsp;Add ingredient</button>
+    </div>
+    <hr>
     <div class="form-group">
-        <label for ="post_tags">Post Tags</label>
+        <label for ="post_tags">Recipe tags</label>
         <div><input type ="text" class="form-control" name="post_tags"></div>
     </div>
     <div class = "form-group">
-        <label for ="post_content">Post Content</label>
+        <label for ="post_content">Recipe preparation</label>
         <textarea class="form-control" name="post_content" id="textarea" cols="30" rows ="10"></textarea>
     </div>
-    <button type="submit" name="create_draft_post" class="btn btn-primary">Submit</button>
+    <button type="submit" name="create_draft_post" class="btn btn-primary btn-block">Submit</button>
 </form>
 
 
 
 <script>
    $(document).ready( function() {
-$('.js--add-image-button').click(function(){
-  $('.js--image-container').append('<input type="file" name="file[]"/>')
-});
+      $('.js--add-image-button').click(function(){
+        $('.js--image-block').append('<input class="form-control-file mb-2" type="file" name="file[]"/>')
+      });
+
+      $('.js--add-ingredient-button').click(function(){
+        $('.js--ingredients-block').append(`
+        <div class="col-md-2 form-group">
+            <label for="ingredient['quantity']" >Amount</label>
+            <input 
+                type="text" 
+                rel="tooltip" 
+                title="Examples: 1, 2 or ½ and ¼ " 
+                data-toggle="tooltip" 
+                data-placement="bottom" 
+                class="form-control" 
+                id="ingredient_quantity"  
+                name="ingredient['quantity']" 
+                value="Amount">
+        </div>
+        <div class="col-md-2 form-group">
+            <label for="ingredient['unit']" >Unit</label>
+            <input 
+                type="text" 
+                rel="tooltip" 
+                title="Examples: G, Kg, Cup or Tablespoons" 
+                data-toggle="tooltip" 
+                data-placement="bottom" 
+                class="form-control" 
+                name="ingredient['unit']" 
+                placeholder="Unit">
+        </div>
+        <div class="col-md-7 form-group">
+            <label for="ingredient['description']" >Ingredient description</label>
+            <input 
+              type="text"
+              rel="tooltip" 
+              title="Example: ...warm milk (110 degrees F/45 degrees C)" 
+              data-toggle="tooltip" 
+              data-placement="bottom"  
+              class="form-control" 
+              name="ingredient['description']" 
+              placeholder="Enter description">
+        </div>  
+        `)
+      });
+
+
+
+
+
+
+$('input[rel="tooltip"]').tooltip();
+
    })
 </script>

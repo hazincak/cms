@@ -21,7 +21,7 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
          <!-- jQuery -->
-         <script src="js/jquery.js" defer></script>
+         <script src="js/jquery.js"></script>
          <script src="js/bootstrap.min.js" defer></script>
         <script src = "js/scripts.js" defer></script>
     </head>
