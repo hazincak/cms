@@ -26,6 +26,7 @@
                         while($row = mysqli_fetch_assoc($select_all_posts_query)){
                             $post_title = $row["post_title"];
                             $post_id = $row["post_id"];
+                            $post_short_description = $row['post_short_description'];
                             $post_author = $row["username"];
                             $post_date = $row["post_date"];
                             $post_image = $row["post_image"];
@@ -35,21 +36,23 @@
                             ?>
                             
                  
-                        <!-- First Blog Post -->
-                        <h2>
-                            <a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title?></a>
-                        </h2>
-                        <p class="lead">
-                            by <a href="index.php"><?php echo $post_author?></a>
-                        </p>
-                        <p><span class="glyphicon glyphicon-time"></span><?php echo $post_date?></p>
-                        <hr>
-                        <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
-                        <hr>
-                        <p><?php echo $post_content?></p>
-                        <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-        
-                        <hr>
+                            <div class="card" style="width: 100%;">
+                          <img class="card-img-tom" src="images/<?php echo $post_image?>" alt="">
+                          <div class="card-body">
+                            <h5 class="card-title text-center"><a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title?></a></h5>
+                            <p class="card-text text-center"><?php echo $post_short_description?></p>
+                            <div class="d-flex justify-content-center">
+                                <div>Added on&nbsp;<?php echo $post_date?></div>
+                                <div>&nbsp;by <a href="author_posts.php?author=<?php echo $post_author?>&user_id=<?php echo $post_author_id?>&p_id=<?php echo $post_id;?>"><?php echo $post_author?></a></div>
+                            </div>
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="col-6 text-center">
+                                    <a class="btn btn-primary btn-block" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                        
                         <?php } }?>
                

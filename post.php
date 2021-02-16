@@ -20,22 +20,43 @@ $select_all_posts_query = mysqli_query($connection, $query);
 while($row = mysqli_fetch_assoc($select_all_posts_query)){
     $post_title = $row["post_title"];
     $post_author = $row["username"];
+    $post_prep_time = $row['post_prep_time'];
+    $post_cook_time = $row['post_cook_time'];
     $post_date = $row["post_date"];
     $post_image = $row["post_image"];
     $post_content = $row["post_content"];
+
+    $recipe_total_time = (int)$post_prep_time + (int)$post_cook_time;
  } ?>
                       
                         <!-- First Blog Post -->
                         <h2>
                             <a href="#"><?php echo $post_title?></a>
                         </h2>
-                        <p class="lead">
-                            by <a href="index.php"><?php echo $post_author?></a>
-                        </p>
-                        <p><span class="glyphicon glyphicon-time"></span><?php echo $post_date?></p>
+                        <div class="d-flex justify-content-between">
+                            <div><h6><?php echo $post_date?></h6></div>
+                            <div><h6> by <a href="index.php"><?php echo $post_author?></a></h6></div>
+                        </div>
                         <hr>
                         <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
                         <hr>
+                        <h5>Recipe details</h5>
+                        <p><i class="fas fa-hourglass-start"></i>&nbsp;Preparation time:&nbsp;<?php echo $post_prep_time; ?>&nbsp;minutes</p>
+                        <p><i class="fas fa-hourglass-half"></i>&nbsp;Cooking time:&nbsp;<?php echo $post_cook_time;?>&nbsp;minutes</p>
+                        <p><i class="fas fa-hourglass-end"></i>&nbsp;Total time:&nbsp;<?php echo $recipe_total_time ?>&nbsp;minutes</p>
+                        <hr>
+                        <h5>Ingredients</h5>
+                        <?php
+                            $query = "SELECT * FROM ingredients WHERE ingredient_post_id = $the_post_id ";
+                            $select_all_post_ingredients = mysqli_query($connection, $query);
+                            while($row = mysqli_fetch_assoc($select_all_post_ingredients)){
+                                $ingredient_description = $row['ingredient_description'];
+                                echo "<p>$ingredient_description</p>";
+                            }
+                            confirm($select_all_post_ingredients);
+                        ?>
+                        <hr>
+                        <h5>Directions</h5>
                         <p><?php echo $post_content?></p>
                        
         
@@ -72,7 +93,7 @@ if(isset($_POST['create_comment'])){
 }
 ?>
                 <!-- Comments Form -->
-                <div class="card">
+                <div class="card border-light">
                     <h4>Leave a Comment:</h4>
                     <form action="" method="post" role="form">
                         <div class="form-group">
@@ -116,8 +137,8 @@ if(isset($_POST['create_comment'])){
             
     ?>
 
-                <div class="media">
-                    <div class="media-body">
+                <div>
+                    <div>
                         <h4 class="media-heading"><?php echo $comment_user_username; ?>
                             <small><?php echo $comment_date; ?></small>
                         </h4>
