@@ -128,10 +128,47 @@ if(isset($_POST['create_draft_post'])){
           <button type="button" name="addButton" class="btn btn-success btn-sm js--add-ingredient-button"><i class="fas fa-plus"></i>&nbsp;Add ingredient</button>
     </div>
     <hr>
-    <div class="form-group">
-        <label for ="post_tags">Recipe tags</label>
-        <div><input type ="text" class="form-control" name="post_tags"></div>
-    </div>
+    <div class="row">
+      <div class="col-md-4">
+      <label for ="preparation_time">Preparation time</label>
+        <select name="preparation_time" class="form-control">
+          <option selected disabled>Choose preparation time</option>
+          <option>15 minutes</option>
+          <option>30 minutes</option>
+          <option>60 minutes</option>
+          <option>90 minutes</option>
+          <option>120 minutes</option>
+          <option>160 minutes</option>
+        </select>
+      </div>
+      <div class="col-md-4 form-group">
+        <label for="cooking_time" >Cooking time</label>
+        <select name="cooking_time" class="form-control">
+          <option selected disabled>Choose cooking time</option>
+          <option>15 minutes</option>
+          <option>30 minutes</option>
+          <option>60 minutes</option>
+          <option>90 minutes</option>
+          <option>120 minutes</option>
+          <option>160 minutes</option>
+        </select>
+      </div>
+      <div class="col-md-4 form-group">
+        <label for="servings">Servings</label>
+        <select name="cooking_time" class="form-control">
+          <option selected disabled>Choose servings</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+        </select>
+      </div>
+  </div>
+  <!-- row -->
     <div class = "form-group">
         <label for ="post_content">Recipe preparation</label>
         <textarea class="form-control" name="post_content" id="textarea" cols="30" rows ="10"></textarea>
@@ -174,7 +211,7 @@ if(isset($_POST['create_draft_post'])){
                 name="ingredient['unit']" 
                 placeholder="Unit">
         </div>
-        <div class="col-md-7 form-group">
+        <div class="col-md-8 form-group">
             <label for="ingredient['description']" >Ingredient description</label>
             <input 
               type="text"

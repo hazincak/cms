@@ -23,7 +23,7 @@
          <!-- jQuery -->
          <script src="js/jquery.js"></script>
          <script src="js/bootstrap.min.js" defer></script>
-        <script src = "js/scripts.js" defer></script>
+        <script src = "js/scripts.js"></script>
     </head>
 
 <body>
