@@ -72,7 +72,7 @@ if(isset($_POST['create_comment'])){
 }
 ?>
                 <!-- Comments Form -->
-                <div class="well">
+                <div class="card">
                     <h4>Leave a Comment:</h4>
                     <form action="" method="post" role="form">
                         <div class="form-group">

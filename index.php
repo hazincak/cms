@@ -36,6 +36,7 @@ if($page == "" || $page == 1){
     $select_all_posts_query = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_all_posts_query)){
         $post_title = $row["post_title"];
+        $post_short_description = $row['post_short_description'];
         $post_id = $row["post_id"];
         $post_author_id = $row['user_id'];
         $post_author = $row["username"];
@@ -60,7 +61,7 @@ if($page == "" || $page == 1){
                             <img class="img-fluid" src="images/<?php echo $post_image?>" alt="">
                         </a>
                         <hr>
-                        <p><?php echo $post_content?></p>
+                        <p><?php echo $post_short_description?></p>
                         <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
         
                         <hr>

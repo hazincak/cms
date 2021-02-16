@@ -9,7 +9,7 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-12">
             <h1 class="page-header">
               User options
               <small>Logged in as:&nbsp<?php echo $_SESSION['username'] ?></small>
@@ -42,8 +42,7 @@
                
             </div>
             
-            <!-- Blog Sidebar Widgets Column -->
-            <?php include "includes/sidebar.php" ?>
+           
 
         </div>
         <!-- /.row -->

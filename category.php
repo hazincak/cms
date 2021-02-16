@@ -2,6 +2,12 @@
 <?php include  "includes/header.php" ?>
     <!-- Navigation -->
     <?php include "includes/navigation.php"?>
+    <?php
+    if(isset($_GET['category'])){
+        $post_category_id = $_GET['category'];
+        $post_category_name = $_GET['category_name'];
+    }
+    ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -10,11 +16,11 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+            <h1 class="page-header">
+                <?php echo $post_category_name; ?>
+            </h1>
                     <?php 
-if(isset($_GET['category'])){
-    $post_category_id = $_GET['category'];
-    $post_category_name = $_GET['category_name'];
-}
+
                         $query = "SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.post_user_id=users.user_id WHERE post_category_id = $post_category_id";
                         $select_all_posts_query = mysqli_query($connection, $query);
                         while($row = mysqli_fetch_assoc($select_all_posts_query)){
@@ -23,12 +29,12 @@ if(isset($_GET['category'])){
                             $post_author = $row["username"];
                             $post_date = $row["post_date"];
                             $post_image = $row["post_image"];
+                            $post_status = $row["post_status"];
                             $post_content = substr($row["post_content"],0,150);
+                            if($post_status == 'published'){
                             ?>
-                            <h1 class="page-header">
-                            <?php echo $post_category_name; ?>
-                        </h1>
-        
+                            
+                 
                         <!-- First Blog Post -->
                         <h2>
                             <a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title?></a>
@@ -45,7 +51,7 @@ if(isset($_GET['category'])){
         
                         <hr>
                        
-                        <?php } ?>
+                        <?php } }?>
                
             </div>
 
