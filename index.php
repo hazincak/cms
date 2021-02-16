@@ -5,9 +5,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 <?php
@@ -59,7 +57,7 @@ if($page == "" || $page == 1){
                         <p><span class="glyphicon glyphicon-time"></span><?php echo $post_date?></p>
                         <hr>
                         <a href="post.php?p_id=<?php echo $post_id?>">
-                            <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
+                            <img class="img-fluid" src="images/<?php echo $post_image?>" alt="">
                         </a>
                         <hr>
                         <p><?php echo $post_content?></p>
@@ -72,26 +70,27 @@ if($page == "" || $page == 1){
             
 
             </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <?php include "includes/sidebar.php" ?>
+            <!-- md-8 column -->
+            <div class="col-md-4">
+                 <?php include "includes/sidebar.php" ?>
+            </div>
 
         </div>
         <!-- /.row -->
-
         <hr>
-
-            <ul class="pager">
-            <?php for($i = 1; $i <= $count; $i++){
-
-                if($i == $page){
-                    echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
-                }else{
-                    echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
-                }
-                
-                
-            } ?>
-               
-            </ul>
+            <div class="row justify-content-center">
+                <div class="col-6 text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <?php for($i = 1; $i <= $count; $i++){
+                                if($i == $page){
+                                    echo "<li class='page-item-active'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+                                }else{
+                                    echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+                                }
+                            } ?>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
       <?php include  "includes/footer.php" ?>
