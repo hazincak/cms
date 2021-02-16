@@ -43,7 +43,7 @@ if(isset($_POST['create_draft_post'])){
       $filename = $_FILES['file']['name'][$i];
       // Upload file
       move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
-      $query = "INSERT INTO images (image_path, image_post_id)";
+      $query = "INSERT INTO images (image_name, image_post_id)";
       $query .= "VALUES('{$filename}','{$the_post_id}')";
       $attach_image_query = mysqli_query($connection, $query);
       confirm($attach_image_query);

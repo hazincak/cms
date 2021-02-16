@@ -4,12 +4,12 @@ if(isset($_GET['p_id'])){
    $the_post_id = $_GET['p_id'];
 }
 
-$query = "SELECT * FROM posts WHERE post_id = {$the_post_id} ";
+$query = "SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.post_user_id = users.user_id WHERE post_id = {$the_post_id} ";
 $select_posts_by_id = mysqli_query($connection, $query);
 
  while($row = mysqli_fetch_assoc($select_posts_by_id)){
    $post_id = $row['post_id'];
-   $post_author = $row['post_author'];
+   $post_author = $row['username'];
    $post_title = $row['post_title'];
    $post_category_id = $row['post_category_id'];
    $post_date = $row['post_date'];
@@ -68,10 +68,11 @@ if(isset($_POST['update_post'])){
         <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for ="title">Post Title</label>
-                    <div><input value="<?php echo $post_title; ?>" type ="text" class="form_control" name="title"></div>
+                    <div><input value="<?php echo $post_title; ?>" type ="text" class="form-control" name="title"></div>
             </div>
             <div class="form-group">
-                    <select name="post_category" id="">
+                <label >Post Category</label>
+                    <select class="form-control" name="post_category" id="">
 <?php 
  $query = "SELECT * FROM categories";
  $select_categories = mysqli_query($connection, $query);
@@ -94,7 +95,7 @@ if(isset($_POST['update_post'])){
         </div>
         <div class="form-group">
             <label for ="post_status">Post Status</label>
-                <select class="input-group" name="post_status" id="">
+                <select class="form-control" name="post_status" id="">
                 <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
 <?php
 if ($post_status == "published"){
@@ -109,6 +110,26 @@ if ($post_status == "published"){
             <label for ="image">Post Image</label>
                 <div><img width= 100   src="../images/<?php echo $post_image?>"></div>
                 <div><input type ="file"  name="image"></div>
+        </div>
+        <div class="form-group">
+            <h5>Post Images</h5>
+             <?php 
+             $query = "SELECT * FROM images WHERE image_post_id=$the_post_id";
+             $select_posts_images = mysqli_query($connection, $query);
+             while($row = mysqli_fetch_assoc($select_posts_images)){
+                 $image_name = $row['image_name'];
+                 $image_id = $row['image_id'];
+                 echo "
+                 <div class='col'>
+                    <img class='img-responsive' style='max-width:150px'   src='../images/postImages/$image_name'>
+                    <a href='posts.php?deleteImage={$image_id}&p_id={$the_post_id}' class='btn btn-secondary'>Delete image</a>
+                 </div>";
+             }
+             confirm($select_posts_images);
+             ?>
+             
+    
+            </div>
         </div>
         <div class="form-group">
             <label for ="post_tags">Post Tags</label>

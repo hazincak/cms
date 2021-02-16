@@ -94,4 +94,16 @@ function deleteCategories(){
             header("Location: categories.php"); //refreshening page - redirecting page on click
     }
 }
+
+function deleteImage(){
+    global $connection;
+    if(isset($_GET['deleteImage'])){
+        $image_id = $_GET['deleteImage'];
+        $post_id = $_GET['p_id'];
+            $query = "DELETE FROM images WHERE image_id = '{$image_id}'";
+            $delete_image_query = mysqli_query($connection, $query);
+            confirm($delete_image_query);
+            header("Location: posts.php?source=edit_post&p_id={$post_id}");
+    }
+}
 ?>

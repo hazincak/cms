@@ -1,6 +1,6 @@
 <?php include "admin_includes/admin_header.php" ?>
 <body>
-
+<?php deleteImage(); ?>
     <div id="wrapper">
     <!-- Navigation -->
         <?php include "admin_includes/admin_navigation.php" ?>
