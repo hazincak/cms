@@ -1,10 +1,20 @@
 <?php
+
+function console_log($output, $with_script_tags = true) {
+  $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
+');';
+  if ($with_script_tags) {
+      $js_code = '<script>' . $js_code . '</script>';
+  }
+  echo $js_code;
+};
+
 if(isset($_POST['create_draft_post'])){
+
 
     $post_title = escape($_POST['title']);
     $post_author_id = $_SESSION['user_id'];
     $post_category_id = escape($_POST['post_category']);
-    
     
     $post_image = $_FILES['image']['name'];
     $post_image_temp = $_FILES['image']['tmp_name'];
@@ -12,39 +22,52 @@ if(isset($_POST['create_draft_post'])){
     $post_tags = escape($_POST['post_tags']);
     $post_content = escape($_POST['post_content']);
     $post_date = escape(date('d-m-y'));
-    // $post_comment_count = ;
+
+    $post_preparation_time = escape($_POST['preparation_time']);
+    $post_cooking_time = escape($_POST['cooking_time']);
+    $post_servings = escape($_POST['servings']);
+
 
     move_uploaded_file($post_image_temp, "images/$post_image");
-
-    $query = "INSERT INTO posts(post_category_id, post_title, post_user_id, post_date, post_image, post_content, post_tags, post_status)";
-    $query .= "VALUES('{$post_category_id}','{$post_title}','{$post_author_id}',now(),'{$post_image}','{$post_content}','{$post_tags}','draft')";
-
+    $query = "INSERT INTO posts(post_category_id, post_title, post_user_id, post_date, post_image, post_content, post_prep_time, post_cook_time, post_servings, post_tags, post_status)";
+    $query .= "VALUES('{$post_category_id}','{$post_title}','{$post_author_id}',now(),'{$post_image}','{$post_content}','{$post_preparation_time}','{$post_cooking_time}','{$post_servings}','{$post_tags}','draft')";
     $create_post_query = mysqli_query($connection, $query);
 
     confirm($create_post_query);
     $the_post_id = mysqli_insert_id($connection);//pulls out last created ID.
+
     
     // Count total files
     $countfiles = count($_FILES['file']['name']);
     // Looping all files
     for($i=0;$i<$countfiles;$i++){
     $filename = $_FILES['file']['name'][$i];
-    
     // Upload file
     move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
-     
     $query = "INSERT INTO images (image_path, image_post_id)";
     $query .= "VALUES('{$filename}','{$the_post_id}')";
-
     $attach_image_query = mysqli_query($connection, $query);
-
     confirm($attach_image_query);
+  }
 
+    $ingredients = $_POST['ingredient'];
+    foreach($ingredients as $ingredient){
+      console_log($ingredient['amount']);
+     
+  
+    $ingredient_amount = $ingredient["amount"];
+    $ingredient_unit = $ingredient["unit"];
+    $ingredient_description = $ingredient["description"];
+
+
+    $query = "INSERT INTO ingredients (ingredient_amount, ingredient_unit, ingredient_description, ingredient_post_id)";
+    $query .= "VALUES('{$ingredient_amount}','{$ingredient_unit}','{$ingredient_description}','{$the_post_id}')"; 
+    $attach_ingredients_query = mysqli_query($connection, $query);
+    confirm($attach_ingredients_query);
+  
   }
     
-    
-    
-    echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='userOptions.php?source=create_post'>Add More Posts</a></p>";
+  echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='userOptions.php?source=create_post'>Add More Posts</a></p>";
 }
 
 
@@ -87,7 +110,7 @@ if(isset($_POST['create_draft_post'])){
     <hr>
     <div class="row js--ingredients-block">
         <div class="col-md-2 form-group">
-            <label for="ingredient['quantity']" >Amount</label>
+            <label>Amount</label>
             <input 
                 type="text" 
                 rel="tooltip" 
@@ -96,11 +119,11 @@ if(isset($_POST['create_draft_post'])){
                 data-placement="bottom" 
                 class="form-control" 
                 id="ingredient_quantity"  
-                name="ingredient['quantity']" 
-                value="Amount">
+                name="ingredient[0][amount]" 
+                placeholder="Amount">
         </div>
         <div class="col-md-2 form-group">
-            <label for="ingredient['unit']" >Unit</label>
+            <label>Unit</label>
             <input 
                 type="text" 
                 rel="tooltip" 
@@ -108,11 +131,11 @@ if(isset($_POST['create_draft_post'])){
                 data-toggle="tooltip" 
                 data-placement="bottom" 
                 class="form-control" 
-                name="ingredient['unit']" 
+                name="ingredient[0][unit]" 
                 placeholder="Unit">
         </div>
         <div class="col-md-8 form-group">
-            <label for="ingredient['description']" >Ingredient description</label>
+            <label>Ingredient description</label>
             <input 
               type="text"
               rel="tooltip" 
@@ -120,7 +143,7 @@ if(isset($_POST['create_draft_post'])){
               data-toggle="tooltip" 
               data-placement="bottom"  
               class="form-control" 
-              name="ingredient['description']" 
+              name="ingredient[0][description]" 
               placeholder="Enter description">
         </div>
     </div>
@@ -133,61 +156,68 @@ if(isset($_POST['create_draft_post'])){
       <label for ="preparation_time">Preparation time</label>
         <select name="preparation_time" class="form-control">
           <option selected disabled>Choose preparation time</option>
-          <option>15 minutes</option>
-          <option>30 minutes</option>
-          <option>60 minutes</option>
-          <option>90 minutes</option>
-          <option>120 minutes</option>
-          <option>160 minutes</option>
+          <option value="15">15 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="60">60 minutes</option>
+          <option value="90">90 minutes</option>
+          <option value="120">120 minutes</option>
+          <option value="160">160 minutes</option>
         </select>
       </div>
       <div class="col-md-4 form-group">
         <label for="cooking_time" >Cooking time</label>
         <select name="cooking_time" class="form-control">
           <option selected disabled>Choose cooking time</option>
-          <option>15 minutes</option>
-          <option>30 minutes</option>
-          <option>60 minutes</option>
-          <option>90 minutes</option>
-          <option>120 minutes</option>
-          <option>160 minutes</option>
+          <option value="15">15 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="60">60 minutes</option>
+          <option value="90">90 minutes</option>
+          <option value="120">120 minutes</option>
+          <option value="160">160 minutes</option>
         </select>
       </div>
       <div class="col-md-4 form-group">
         <label for="servings">Servings</label>
-        <select name="cooking_time" class="form-control">
+        <select name="servings" class="form-control">
           <option selected disabled>Choose servings</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
+          <option value="1" >1</option>
+          <option value="2" >2</option>
+          <option value="3" >3</option>
+          <option value="4" >4</option>
+          <option value="5" >5</option>
+          <option value="6" >6</option>
+          <option value="7" >7</option>
+          <option value="8" >8</option>
         </select>
       </div>
   </div>
   <!-- row -->
-    <div class = "form-group">
-        <label for ="post_content">Recipe preparation</label>
+  <div class="form-group">
+        <label for ="post_tags">Post Tags</label>
+        <div><input type ="text" class="form-control" name="post_tags"></div>
+  </div>
+  <div class = "form-group">
+        <label for ="post_content">Post Content</label>
         <textarea class="form-control" name="post_content" id="textarea" cols="30" rows ="10"></textarea>
-    </div>
-    <button type="submit" name="create_draft_post" class="btn btn-primary btn-block">Submit</button>
+  </div>
+  <button type="submit" name="create_draft_post" class="btn btn-primary btn-block">Submit</button>
 </form>
 
 
 
 <script>
    $(document).ready( function() {
+    let index = 0;
+
       $('.js--add-image-button').click(function(){
         $('.js--image-block').append('<input class="form-control-file mb-2" type="file" name="file[]"/>')
       });
 
       $('.js--add-ingredient-button').click(function(){
+        index++;
         $('.js--ingredients-block').append(`
         <div class="col-md-2 form-group">
-            <label for="ingredient['quantity']" >Amount</label>
+            <label>Amount</label>
             <input 
                 type="text" 
                 rel="tooltip" 
@@ -196,11 +226,11 @@ if(isset($_POST['create_draft_post'])){
                 data-placement="bottom" 
                 class="form-control" 
                 id="ingredient_quantity"  
-                name="ingredient['quantity']" 
-                value="Amount">
+                name="ingredient[${index}][amount]" 
+                placeholder="Amount">
         </div>
         <div class="col-md-2 form-group">
-            <label for="ingredient['unit']" >Unit</label>
+            <label>Unit</label>
             <input 
                 type="text" 
                 rel="tooltip" 
@@ -208,11 +238,11 @@ if(isset($_POST['create_draft_post'])){
                 data-toggle="tooltip" 
                 data-placement="bottom" 
                 class="form-control" 
-                name="ingredient['unit']" 
+                name="ingredient[${index}][unit]" 
                 placeholder="Unit">
         </div>
         <div class="col-md-8 form-group">
-            <label for="ingredient['description']" >Ingredient description</label>
+            <label>Ingredient description</label>
             <input 
               type="text"
               rel="tooltip" 
@@ -220,7 +250,7 @@ if(isset($_POST['create_draft_post'])){
               data-toggle="tooltip" 
               data-placement="bottom"  
               class="form-control" 
-              name="ingredient['description']" 
+              name="ingredient[${index}][description]" 
               placeholder="Enter description">
         </div>  
         `)
