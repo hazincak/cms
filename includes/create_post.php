@@ -11,7 +11,6 @@ function console_log($output, $with_script_tags = true) {
 
 if(isset($_POST['create_draft_post'])){
 
-
     $post_title = escape($_POST['title']);
     $post_author_id = $_SESSION['user_id'];
     $post_category_id = escape($_POST['post_category']);
@@ -37,37 +36,9 @@ if(isset($_POST['create_draft_post'])){
     $the_post_id = mysqli_insert_id($connection);//pulls out last created ID.
 
     
-    // Count total files
-    $countfiles = count($_FILES['file']['name']);
-    // Looping all files
-    for($i=0;$i<$countfiles;$i++){
-    $filename = $_FILES['file']['name'][$i];
-    // Upload file
-    move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
-    $query = "INSERT INTO images (image_path, image_post_id)";
-    $query .= "VALUES('{$filename}','{$the_post_id}')";
-    $attach_image_query = mysqli_query($connection, $query);
-    confirm($attach_image_query);
-  }
-
-    $ingredients = $_POST['ingredient'];
-    foreach($ingredients as $ingredient){
-      console_log($ingredient['amount']);
-     
-  
-    $ingredient_amount = $ingredient["amount"];
-    $ingredient_unit = $ingredient["unit"];
-    $ingredient_description = $ingredient["description"];
-
-
-    $query = "INSERT INTO ingredients (ingredient_amount, ingredient_unit, ingredient_description, ingredient_post_id)";
-    $query .= "VALUES('{$ingredient_amount}','{$ingredient_unit}','{$ingredient_description}','{$the_post_id}')"; 
-    $attach_ingredients_query = mysqli_query($connection, $query);
-    confirm($attach_ingredients_query);
-  
-  }
     
-  echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='userOptions.php?source=create_post'>Add More Posts</a></p>";
+    
+  echo "<p class='bg-success'>Post Created. <a href ='post.php?p_id={$the_post_id}'>View Post</a>&nbspor&nbsp<a href='userOp5tions.php?source=create_post'>Add More Posts</a></p>";
 }
 
 
