@@ -144,7 +144,7 @@ if(isset($_POST['update_post'])){
     <div class="form-group">
         <label for ="image">Post Main Image</label>
             <div><img width= 100   src="images/<?php echo $post_image?>"></div>
-            <div><input type ="file" style="margin-top: 3px"  name="image"></div>
+            <div><input type ="file"  name="image"></div>
     </div>
     <div class="form-group">
         <label>Delete Recipe Images</label>
@@ -207,7 +207,7 @@ if(isset($_POST['update_post'])){
                         />     
                 </div>
                 <div>
-                    <button type="button" name="addButton" style="margin-top: 5px;" class="btn btn-success btn-block btn-sm js--add-ingredient-button"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add ingredient</button>
+                    <button type="button" name="addButton" style="margin-top: 5px;" class="btn btn-success btn-block btn-sm js--add-ingredient-button">&nbsp;Add ingredient</button>
                 </div>              
              </div>
         </div>
@@ -275,7 +275,7 @@ if(isset($_POST['update_post'])){
 <script>
 $(document).ready(function(){
     $('.js--add-image-button').click(function(){
-        $('.js--image-container').append('<input class="form-control-file" style="margin-top: 3px" type="file" name="file[]"/>')
+        $('.js--image-container').append('<input class="form-control-file mt-2" type="file" name="file[]"/>')
       });
     $('.js--add-ingredient-button').click(function(){
         $('.js--ingredients-block').append(`

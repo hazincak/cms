@@ -37,7 +37,7 @@ while($row = mysqli_fetch_assoc($select_all_posts_query)){
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span>&nbsp;<?php echo $post_date?></p>
                         <hr>
-                        <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
+                        <img class="img-fluid" src="images/<?php echo $post_image?>" alt="">
                         <hr>
                         <p><?php echo $post_content?></p>
                        

@@ -58,7 +58,9 @@
                 $query = "DELETE FROM posts where post_id = {$the_post_id}";
                 $delete_query = mysqli_query($connection, $query);
                 confirm($delete_query);
-                echo "<p class='bg-danger'>Post Deleted!</p>";
+                echo "<div class='alert alert-danger' role='alert'>
+                        Post Deleted!
+                    </div>";
                 header("refresh:3");
             } 
     ?>

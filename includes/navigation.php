@@ -30,8 +30,8 @@
                             <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-user'></i>Logged in as: {$_SESSION['username']} <b class='caret'></b></a>
                             <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
                                 <a class='dropdown-item' href='userOptions.php?source=profile'><i class='fa fa-fw fa-user'></i> Profile</a>
-                                <a class='dropdown-item' href='userOptions.php?source=all_posts'><i class='fa fa-fw fa-user'></i> My posts</a>
-                                <a class='dropdown-item' href='userOptions.php?source=create_post'><i class='fa fa-fw fa-user'></i> Add post</a>
+                                <a class='dropdown-item' href='userOptions.php?source=all_posts'><i class='fas fa-list'></i> My posts</a>
+                                <a class='dropdown-item' href='userOptions.php?source=create_post'><i class='fas fa-plus'></i> Add post</a>
                                 <div class='dropdown-divider'></div>       
                                 <a class='dropdown-item' href='includes/logout.php'><i class='fa fa-fw fa-power-off'></i> Log Out</a>
                             </div>";

@@ -73,8 +73,8 @@ if(isset($_POST['submit'])){
     
 <section id="login">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6 ">
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">

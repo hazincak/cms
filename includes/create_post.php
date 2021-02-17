@@ -186,7 +186,7 @@ if(isset($_POST['create_draft_post'])){
     let index = 0;
 
       $('.js--add-image-button').click(function(){
-        $('.js--image-block').append('<input class="form-control-file mb-2" type="file" name="file[]"/>')
+        $('.js--image-block').append('<input class="form-control-file m-2" type="file" name="file[]"/>')
       });
 
       $('.js--add-ingredient-button').click(function(){

@@ -29,7 +29,6 @@ $select_posts_by_id = mysqli_query($connection, $query);
 if(isset($_POST['update_post'])){
     $post_title = escape( $_POST['title']);
     $post_short_description = escape($_POST['post_short_description']);
-    $post_author = escape( $_POST['post_author']);
     $post_category_id = escape($_POST['post_category']);
     $post_status = escape($_POST['post_status']);
     
@@ -171,7 +170,7 @@ if(isset($_POST['update_post'])){
     </div>
     <div class="form-group js--image-container">
         <label for="file">Add More Recipe Images</label>
-        <input type="file" class="form-control-file mb-2" name="file[]" required/>
+        <input type="file" class="form-control-file mb-2" name="file[]"/>
     </div>
     <button type="button" class="btn btn-secondary btn-sm js--add-image-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add image</button>
     <hr>
