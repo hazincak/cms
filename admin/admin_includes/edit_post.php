@@ -160,9 +160,8 @@ if(isset($_POST['update_post'])){
                  echo "
                  <span class='js--image-block'>
                     <div class='col-md-1 '>
-                       $image_id
                        <img class='img-responsive' style='max-width:150px'   src='../images/postImages/$image_name'>
-                       <button data-imageId=$image_id  data-postId=$post_id} class='btn btn-secondary js--delete-image-button'>Delete image</button>
+                       <button data-imageId=$image_id  data-imageName = $image_name class='btn btn-secondary js--delete-image-button'>Delete image</button>
                     </div>
                 </span>";
              }
@@ -294,13 +293,14 @@ $(document).ready(function(){
     $('.js--delete-image-button').click(function(){
         var clickedElement = $(this);
         var imageId = $(clickedElement).attr('data-imageId');
-
+        var imageName = $(clickedElement).attr('data-imageName');
         $.ajax({
                 url:"functions.php",
                 type:"post",
                 data: {
                     method: "deleteImage",
                     imageId: imageId,
+                    imageName: imageName
                 },
                 success: function(response){
                    if(response === 'success'){

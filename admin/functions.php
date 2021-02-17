@@ -5,6 +5,7 @@ if(isset($_POST['method'])){
     $calledMethod = $_POST['method'];
     $ingredientId;
     $imageId;
+    $imageName;
 
     if(isset($_POST['ingredientId'])){
         $ingredientId = $_POST['ingredientId'];
@@ -12,6 +13,7 @@ if(isset($_POST['method'])){
 
     if(isset($_POST['imageId'])){
         $imageId = $_POST['imageId'];
+        $imageName = $_POST['imageName'];
     };
 
     switch ($calledMethod) {
@@ -21,7 +23,7 @@ if(isset($_POST['method'])){
             break ;  /* Exit only the switch. */
         case "deleteImage":
             $calledMethod = null;
-            deleteImage($imageId, $connection);
+            deleteImage($imageId, $imageName, $connection);
             break;
         default:
             break;
@@ -123,10 +125,11 @@ function deleteCategories(){
     }
 }
 
-function deleteImage($imageId, mysqli $connection){
+function deleteImage($imageId, $imageName ,mysqli $connection){
     $query = "DELETE FROM images WHERE image_id = $imageId";
     $delete_image_query = mysqli_query($connection, $query);
     confirm($delete_image_query);
+    deleteImageFromProjectFolder($imageName);
     echo 'success';
 }
 
@@ -136,6 +139,11 @@ function deleteIngredient($ingredientId, mysqli $connection){
     $delete_ingredient_query = mysqli_query($connection, $query);
     confirm($delete_ingredient_query);
     echo json_encode('success');
+}
+
+function deleteImageFromProjectFolder($imageName){
+    $path = "../images/postImages/" . $imageName;
+    unlink($path);
 }
 
 ?>
