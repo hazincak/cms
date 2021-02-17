@@ -42,15 +42,11 @@ if(isset($_POST['create_post'])){
     $ingredients = $_POST['ingredient'];
     $trimmed_array = array_map('trim', $ingredients);
     foreach($trimmed_array as $ingredient){
-
     $ingredient_description = $ingredient;
-
-
     $query = "INSERT INTO ingredients (ingredient_description, ingredient_post_id)";
     $query .= "VALUES('{$ingredient_description}','{$the_post_id}')"; 
     $attach_ingredients_query = mysqli_query($connection, $query);
     confirm($attach_ingredients_query);
-  
   }
 
     confirm($create_post_query);
@@ -65,11 +61,11 @@ if(isset($_POST['create_post'])){
 <h3>Create recipe</h3>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="post_title">Recipe title</label>
+      <label for="post_title">Recipe Title</label>
       <input type="text" class="form-control" id="post_title" name="title"  placeholder="Enter title" required>
     </div>
     <div class="form-group">
-        <label for ="post_short_description">Recipe short description</label>
+        <label for ="post_short_description">Recipe Short Description</label>
         <div><input type ="text" class="form-control" name="post_short_description" placeholder="Enter short recipe description" required></div>
     </div>
     <div class="form-group">

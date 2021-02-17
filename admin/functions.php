@@ -103,7 +103,19 @@ function deleteImage(){
             $query = "DELETE FROM images WHERE image_id = '{$image_id}'";
             $delete_image_query = mysqli_query($connection, $query);
             confirm($delete_image_query);
-            header("Location: posts.php?source=edit_post&p_id={$post_id}");
+            // header("Location: posts.php?source=edit_post&p_id={$post_id}");
+    }
+}
+
+function deleteIngredient(){
+    global $connection;
+    if(isset($_GET['deleteIngredient'])){
+        $ingredient_id = $_GET['deleteIngredient'];
+        $post_id = $_GET['p_id'];
+            $query = "DELETE FROM ingredients WHERE ingredient_id = '{$ingredient_id}'";
+            $delete_ingredient_query = mysqli_query($connection, $query);
+            confirm($delete_ingredient_query);
+            // header("Location: posts.php?source=edit_post&p_id={$post_id}");
     }
 }
 ?>
