@@ -1,4 +1,30 @@
 <?php
+ 
+if(isset($_POST['method'])){
+    include "../includes/db.php"; 
+    $calledMethod = $_POST['method'];
+    $ingredientId;
+    $imageId;
+
+    if(isset($_POST['ingredientId'])){
+        $ingredientId = $_POST['ingredientId'];
+    };
+
+    if(isset($_POST['imageId'])){
+        $imageId = $_POST['imageId'];
+    };
+
+    switch ($calledMethod) {
+        case "deleteIngredient":
+            deleteIngredient($ingredientId, $connection);
+            break ;  /* Exit only the switch. */
+        case "deleteImage":
+            deleteImage($imageId, $connection);
+            break;
+        default:
+            break;
+    }
+}
 
 function escape($string){
 
@@ -95,27 +121,42 @@ function deleteCategories(){
     }
 }
 
-function deleteImage(){
-    global $connection;
-    if(isset($_GET['deleteImage'])){
-        $image_id = $_GET['deleteImage'];
-        $post_id = $_GET['p_id'];
-            $query = "DELETE FROM images WHERE image_id = '{$image_id}'";
-            $delete_image_query = mysqli_query($connection, $query);
-            confirm($delete_image_query);
-            // header("Location: posts.php?source=edit_post&p_id={$post_id}");
-    }
+function deleteImage($imageId, $connection){
+    $query = "DELETE FROM images WHERE image_id = $imageId";
+    $delete_image_query = mysqli_query($connection, $query);
+    confirm($delete_image_query);
+    echo 'success';
 }
 
-function deleteIngredient(){
-    global $connection;
-    if(isset($_GET['deleteIngredient'])){
-        $ingredient_id = $_GET['deleteIngredient'];
-        $post_id = $_GET['p_id'];
-            $query = "DELETE FROM ingredients WHERE ingredient_id = '{$ingredient_id}'";
-            $delete_ingredient_query = mysqli_query($connection, $query);
-            confirm($delete_ingredient_query);
-            // header("Location: posts.php?source=edit_post&p_id={$post_id}");
-    }
+// function deleteImage(){
+//     global $connection;
+//     if(isset($_GET['deleteImage'])){
+//         $image_id = $_GET['deleteImage'];
+//         $post_id = $_GET['p_id'];
+//             $query = "DELETE FROM images WHERE image_id = '{$image_id}'";
+//             $delete_image_query = mysqli_query($connection, $query);
+//             confirm($delete_image_query);
+//             // header("Location: posts.php?source=edit_post&p_id={$post_id}");
+//     }
+// }
+
+function deleteIngredient($ingredientId, mysqli $connection){
+    // global $connection;
+    $query = "DELETE FROM ingredients WHERE ingredient_id = $ingredientId";
+    $delete_ingredient_query = mysqli_query($connection, $query);
+    confirm($delete_ingredient_query);
+    echo json_encode('success');
 }
+
+// function deleteIngredient(){
+//     global $connection;
+//     if(isset($_GET['deleteIngredient'])){
+//         $ingredient_id = $_GET['deleteIngredient'];
+//         $post_id = $_GET['p_id'];
+//             $query = "DELETE FROM ingredients WHERE ingredient_id = '{$ingredient_id}'";
+//             $delete_ingredient_query = mysqli_query($connection, $query);
+//             confirm($delete_ingredient_query);
+//             // header("Location: posts.php?source=edit_post&p_id={$post_id}");
+//     }
+// }
 ?>

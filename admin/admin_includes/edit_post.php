@@ -156,16 +156,19 @@ if(isset($_POST['update_post'])){
                  $image_name = $row['image_name'];
                  $image_id = $row['image_id'];
                  echo "
-                 <div class='col-md-1 '>
-                    <img class='img-responsive' style='max-width:150px'   src='../images/postImages/$image_name'>
-                    <a href='posts.php?deleteImage={$image_id}&p_id={$the_post_id}' class='btn btn-secondary'>Delete image</a>
-                 </div>";
+                 <span class='js--image-block'>
+                    <div class='col-md-1 '>
+                       $image_id
+                       <img class='img-responsive' style='max-width:150px'   src='../images/postImages/$image_name'>
+                       <button data-imageId=$image_id  data-postId=$post_id} class='btn btn-secondary js--delete-image-button'>Delete image</button>
+                    </div>
+                </span>";
              }
              confirm($select_posts_images);
              ?>
         </div>
     </div>
-    <div class="form-group js--image-block">
+    <div class="form-group js--image-container">
         <label for="file">Add More Recipe Images</label>
         <input type="file" class="form-control-file mb-2" name="file[]" required/>
     </div>
@@ -183,8 +186,8 @@ if(isset($_POST['update_post'])){
                            $ingredient_name = $row['ingredient_description'];
                            $ingredient_id = $row['ingredient_id'];
                            echo "
-                           <li class='list-group-item'>
-                                <span><a type='button' href='posts.php?deleteIngredient={$ingredient_id}&p_id={$the_post_id}' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></a></span> 
+                           <li class='list-group-item js--ingredient-block'>
+                                <span><a type='button' data-ingredientId=$ingredient_id data-postId=$the_post_id class='btn btn-danger js--delete-ingredient-button'><span class='glyphicon glyphicon-remove'></a></span> 
                                 {$ingredient_name}
                            </li>
                            ";
@@ -272,18 +275,65 @@ if(isset($_POST['update_post'])){
 <script>
 $(document).ready(function(){
     $('.js--add-image-button').click(function(){
-        $('.js--image-block').append('<input class="form-control-file" style="margin-top: 3px" type="file" name="file[]"/>')
+        $('.js--image-container').append('<input class="form-control-file" style="margin-top: 3px" type="file" name="file[]"/>')
       });
     $('.js--add-ingredient-button').click(function(){
         $('.js--ingredients-block').append(`
-            <label>New Ingredient</label>
-            <input 
-              type="text"
-              class="form-control" 
-              name="ingredient[]" 
-              placeholder="Enter ingredient amount and description">
+            
+                <label>New Ingredient</label>
+                <input 
+                  type="text"
+                  class="form-control" 
+                  name="ingredient[]" 
+                  placeholder="Enter ingredient amount and description">
+            
         `)
       });
+    $('.js--delete-image-button').click(function(){
+        var clickedElement = $(this);
+        var imageId = $(clickedElement).attr('data-imageId');
+
+        $.ajax({
+                url:"functions.php",
+                type:"post",
+                data: {
+                    method: "deleteImage",
+                    imageId: imageId,
+                },
+                success: function(response){
+                   if(response === 'success'){
+                    $(clickedElement).closest('.js--image-block').remove();
+                   }
+                }
+            })
+
+    });
+    $('.js--delete-ingredient-button').click(function (){
+        var clickedElement = $(this);
+        var ingredientId = $(clickedElement).attr('data-ingredientId');
+
+            $.ajax({
+                url:"functions.php",
+                type:"post",
+                dataType: 'json',
+                data: {
+                    method: "deleteIngredient",
+                    ingredientId: ingredientId,
+                },
+                success: function(response){
+                         if(response === 'success'){
+                         $(clickedElement).closest('.js--ingredient-block').remove();
+                        }                   
+                    }
+                   
+                
+            })
+
+    });
+
+    
+
+
 })
 
 // <a  href='posts.php?deleteImage={$image_id}&p_id={$the_post_id}' class='btn btn-secondary'>Delete image</a>
