@@ -29,7 +29,7 @@ $select_posts_by_id = mysqli_query($connection, $query);
 if(isset($_POST['update_post'])){
     $post_title = escape( $_POST['title']);
     $post_short_description = escape($_POST['post_short_description']);
-    $post_author = escape( $_POST['author']);
+    $post_author = escape( $_POST['post_author']);
     $post_category_id = escape($_POST['post_category']);
     $post_status = escape($_POST['post_status']);
     
@@ -81,10 +81,12 @@ if(isset($_POST['update_post'])){
    $query .="post_title ='{$post_title}', ";
    $query .="post_category_id ='{$post_category_id}', ";
    $query .="post_date = now(), ";
-   $query .="post_author ='{$post_author}', ";
    $query .="post_status ='{$post_status}', ";
    $query .="post_tags ='{$post_tags}', ";
    $query .="post_content ='{$post_content}', ";
+   $query .="post_prep_time ='{$post_preparation_time}', ";
+   $query .="post_cook_time ='{$post_cooking_time}', ";
+   $query .="post_servings ='{$post_servings}', ";
    $query .="post_image ='{$post_image}' ";
    $query .="WHERE post_id = {$the_post_id} ";
 
@@ -125,7 +127,7 @@ if(isset($_POST['update_post'])){
     </div>
     <div class="form-group">
         <label for ="post_author">Post Author</label>
-            <input value="<?php echo $post_author; ?>" type ="text" class="form-control" name="author">
+            <input disabled value="<?php echo $post_author; ?>" name="post_author" type ="text" class="form-control" >
     </div>
     <div class="form-group">
         <label for ="post_status">Post Status</label>

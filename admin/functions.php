@@ -16,9 +16,11 @@ if(isset($_POST['method'])){
 
     switch ($calledMethod) {
         case "deleteIngredient":
+            $calledMethod = null;
             deleteIngredient($ingredientId, $connection);
             break ;  /* Exit only the switch. */
         case "deleteImage":
+            $calledMethod = null;
             deleteImage($imageId, $connection);
             break;
         default:
@@ -121,42 +123,19 @@ function deleteCategories(){
     }
 }
 
-function deleteImage($imageId, $connection){
+function deleteImage($imageId, mysqli $connection){
     $query = "DELETE FROM images WHERE image_id = $imageId";
     $delete_image_query = mysqli_query($connection, $query);
     confirm($delete_image_query);
     echo 'success';
 }
 
-// function deleteImage(){
-//     global $connection;
-//     if(isset($_GET['deleteImage'])){
-//         $image_id = $_GET['deleteImage'];
-//         $post_id = $_GET['p_id'];
-//             $query = "DELETE FROM images WHERE image_id = '{$image_id}'";
-//             $delete_image_query = mysqli_query($connection, $query);
-//             confirm($delete_image_query);
-//             // header("Location: posts.php?source=edit_post&p_id={$post_id}");
-//     }
-// }
 
 function deleteIngredient($ingredientId, mysqli $connection){
-    // global $connection;
     $query = "DELETE FROM ingredients WHERE ingredient_id = $ingredientId";
     $delete_ingredient_query = mysqli_query($connection, $query);
     confirm($delete_ingredient_query);
     echo json_encode('success');
 }
 
-// function deleteIngredient(){
-//     global $connection;
-//     if(isset($_GET['deleteIngredient'])){
-//         $ingredient_id = $_GET['deleteIngredient'];
-//         $post_id = $_GET['p_id'];
-//             $query = "DELETE FROM ingredients WHERE ingredient_id = '{$ingredient_id}'";
-//             $delete_ingredient_query = mysqli_query($connection, $query);
-//             confirm($delete_ingredient_query);
-//             // header("Location: posts.php?source=edit_post&p_id={$post_id}");
-//     }
-// }
 ?>
