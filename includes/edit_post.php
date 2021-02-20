@@ -18,7 +18,6 @@ $select_posts_by_id = mysqli_query($connection, $query);
    $post_preparation_time = $row['post_prep_time'];
    $post_cooking_time = $row['post_cook_time'];
    $post_servings = $row['post_servings'];
-   $post_status = $row['post_status'];
    $post_image = $row['post_image'];
    $post_tags = $row['post_tags'];
    $post_comment_count = $row['post_comment_count'];
@@ -80,7 +79,6 @@ if(isset($_POST['update_post'])){
    $query .="post_title ='{$post_title}', ";
    $query .="post_category_id ='{$post_category_id}', ";
    $query .="post_date = now(), ";
-   $query .="post_status ='{$post_status}', ";
    $query .="post_tags ='{$post_tags}', ";
    $query .="post_content ='{$post_content}', ";
    $query .="post_prep_time ='{$post_preparation_time}', ";
@@ -129,22 +127,9 @@ if(isset($_POST['update_post'])){
             <input disabled value="<?php echo $post_author; ?>" name="post_author" type ="text" class="form-control" >
     </div>
     <div class="form-group">
-        <label for ="post_status">Post Status</label>
-            <select class="form-control" name="post_status" id="">
-                <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
-                <?php
-                if ($post_status == "published"){
-                    echo "<option value='draft'>Draft</option>";
-                }else{
-                    echo "<option value='published'>Publish</option>";
-                }
-                ?>
-            </select>
-    </div>
-    <div class="form-group">
         <label for ="image">Post Main Image</label>
             <div><img width= 100   src="images/<?php echo $post_image?>"></div>
-            <div><input type ="file"  name="image"></div>
+            <div><input type ="file" class="mt-2"  name="image"></div>
     </div>
     <div class="form-group">
         <label>Delete Recipe Images</label>
@@ -158,9 +143,9 @@ if(isset($_POST['update_post'])){
                  $image_id = $row['image_id'];
                  echo "
                  <span class='js--image-block'>
-                    <div class='col-md-1 mt-2'>
+                    <div class='col-md-2 mt-2'>
                        <img class='img-responsive' style='max-width:150px'   src='images/postImages/$image_name'>
-                       <button data-imageId=$image_id  data-imageName = $image_name class='btn btn-secondary js--delete-image-button'>Delete image</button>
+                        <button data-imageId=$image_id  data-imageName = '$image_name' class='btn btn-secondary btn-sm js--delete-image-button mt-1'>Delete image</button>                      
                     </div>
                 </span>";
              }
@@ -170,7 +155,7 @@ if(isset($_POST['update_post'])){
     </div>
     <div class="form-group js--image-container">
         <label for="file">Add More Recipe Images</label>
-        <input type="file" class="form-control-file mb-2" name="file[]" required/>
+        <input type="file" class="form-control-file mb-2" name="file[]"/>
     </div>
     <button type="button" class="btn btn-secondary btn-sm js--add-image-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add image</button>
     <hr>
@@ -187,7 +172,7 @@ if(isset($_POST['update_post'])){
                            $ingredient_id = $row['ingredient_id'];
                            echo "
                            <li class='list-group-item js--ingredient-block'>
-                                <span><a type='button' data-ingredientId=$ingredient_id class='btn btn-danger js--delete-ingredient-button'><span style='color: white'><i class='far fa-trash-alt'></i></span></a></span> 
+                                <span><a type='button' data-ingredientId=$ingredient_id class='btn btn-danger js--delete-ingredient-button'><span ><i class='far fa-trash-alt' style='color: white'></i></span></a></span> 
                                 {$ingredient_name}
                            </li>
                            ";

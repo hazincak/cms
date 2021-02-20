@@ -6,10 +6,10 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
+        <div class="row mt-5">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-8 ">
 <?php
 if(isset($_GET["p_id"])){
 $the_post_id=$_GET['p_id'];
@@ -72,7 +72,7 @@ while($row = mysqli_fetch_assoc($select_all_posts_query)){
                                       <a class='thumbnail' href='#' data-image-id='' data-toggle='modal' data-title=''
                                          data-image='images/postImages/$image_name'
                                          data-target='#image-gallery'>
-                                          <img class='img-fluid img-thumbnail' style='height: 90px; width: 180px'
+                                          <img class='img-fluid img-thumbnail' style='min-height: 90px; min-width: 180px'
                                                src='images/postImages/$image_name'
                                                alt='Another alt text'>
                                       </a>

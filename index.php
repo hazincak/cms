@@ -50,8 +50,8 @@ if($page == "" || $page == 1){
 ?>
                         <!-- First Blog Post -->
 
-                        <div class="card" style="width: 100%;">
-                          <img class="card-img-tom" src="images/<?php echo $post_image?>" alt="">
+                        <div class="card mt-2"  >
+                          <img class="card-img-top" src="images/<?php echo $post_image?>" alt="">
                           <div class="card-body">
                             <h5 class="card-title text-center"><a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title?></a></h5>
                             <p class="card-text text-center"><?php echo $post_short_description?></p>
@@ -62,7 +62,7 @@ if($page == "" || $page == 1){
                             <hr>
                             <div class="row justify-content-center">
                                 <div class="col-6 text-center">
-                                    <a class="btn btn-primary btn-block" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <a class="btn btn-block" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                             </div>
                           </div>
@@ -75,9 +75,9 @@ if($page == "" || $page == 1){
 
             </div>
             <!-- md-8 column -->
-            <div class="col-md-4">
+            
                  <?php include "includes/sidebar.php" ?>
-            </div>
+       
 
         </div>
         <!-- /.row -->

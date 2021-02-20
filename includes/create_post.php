@@ -36,8 +36,11 @@ if(isset($_POST['create_draft_post'])){
     confirm($create_post_query);
     $the_post_id = mysqli_insert_id($connection);//pulls out last created ID.
 
+    $trimmed_images = array_map('trim', $_FILES['file']['name']);
      // Count total files
-     $countfiles = count($_FILES['file']['name']);
+     $countfiles = count($trimmed_images);
+
+    
      // Looping all files
      for($i=0;$i<$countfiles;$i++){
       $filename = $_FILES['file']['name'][$i];
@@ -120,7 +123,7 @@ if(isset($_POST['create_draft_post'])){
         </div>
     </div>
     <div>
-          <button type="button" name="addButton" class="btn btn-success btn-sm js--add-ingredient-button"><i class="fas fa-plus"></i>&nbsp;Add ingredient</button>
+          <button type="button" name="addButton" class="btn btn-secondary btn-sm js--add-ingredient-button"><i class="fas fa-plus"></i>&nbsp;Add ingredient</button>
     </div>
     <hr>
     <div class="row">

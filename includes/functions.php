@@ -61,8 +61,13 @@ function deleteIngredient($ingredientId, mysqli $connection){
 }
 
 function deleteImageFromProjectFolder($imageName){
-    $path = "../../images/postImages/" . $imageName;
-    unlink($path);
+    if($imageName == null){
+        return;
+    }else{
+        $path = "../../images/postImages/" . $imageName;
+        unlink($path);
+    }
+   
 }
 
 ?>

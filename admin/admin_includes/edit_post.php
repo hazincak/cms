@@ -159,8 +159,8 @@ if(isset($_POST['update_post'])){
                  echo "
                  <span class='js--image-block'>
                     <div class='col-md-1 '>
-                       <img class='img-responsive' style='max-width:150px'   src='../images/postImages/$image_name'>
-                       <button data-imageId=$image_id  data-imageName = $image_name class='btn btn-secondary js--delete-image-button'>Delete image</button>
+                       <img class='img-responsive' style='max-width:150px; min-height: 100px'   src='../images/postImages/$image_name'>
+                       <button type='button' data-imageId=$image_id  data-imageName = '$image_name' class='btn btn-secondary js--delete-image'>Delete image</button>
                     </div>
                 </span>";
              }
@@ -273,7 +273,7 @@ if(isset($_POST['update_post'])){
 
 </form>
 <script>
-$(document).ready(function(){
+
     $('.js--add-image-button').click(function(){
         $('.js--image-container').append('<input class="form-control-file" style="margin-top: 3px" type="file" name="file[]"/>')
       });
@@ -289,7 +289,7 @@ $(document).ready(function(){
             
         `)
       });
-    $('.js--delete-image-button').click(function(){
+    $('.js--delete-image').click(function(){
         var clickedElement = $(this);
         var imageId = $(clickedElement).attr('data-imageId');
         var imageName = $(clickedElement).attr('data-imageName');
@@ -335,7 +335,7 @@ $(document).ready(function(){
     
 
 
-})
+
 
 // <a  href='posts.php?deleteImage={$image_id}&p_id={$the_post_id}' class='btn btn-secondary'>Delete image</a>
 </script>

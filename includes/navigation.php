@@ -3,10 +3,12 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-                <a class="navbar-brand" href="index.php">Home page</a>
+                <!-- <a class="navbar-brand" href="index.php"><img style="max-width: 290px; max-height: 180px" src="images/logo/logo.png" alt=""></a>
+             -->
+             <img class="navbar-brand" style="max-width: 290px; max-height: 180px; padding-bottom:15px;" src="images/logo/logo.png" alt="">
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav mr-auto">
+                <ul class="nav navbar-nav ml-auto">
                     <?php 
                         $query = "SELECT * FROM categories";
                         $select_all_categories_query = mysqli_query($connection, $query);
@@ -20,14 +22,14 @@
 
                     ?>
                 </ul>
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto ">
                     <?php
                         if(!isset($_SESSION['logged_in'])){
-                            echo "<li><a href='registration.php'>Registration</a></li>";
+                            echo "<li class='nav-item'><a class='nav-link' href='registration.php'>Registration</a></li>";
                         };
                         if(isset($_SESSION['username'])){
                             echo " <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-user'></i>Logged in as: {$_SESSION['username']} <b class='caret'></b></a>
+                            <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-user'></i>&nbsp;Logged in as: {$_SESSION['username']} <b class='caret'></b></a>
                             <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
                                 <a class='dropdown-item' href='userOptions.php?source=profile'><i class='fa fa-fw fa-user'></i> Profile</a>
                                 <a class='dropdown-item' href='userOptions.php?source=all_posts'><i class='fas fa-list'></i> My posts</a>

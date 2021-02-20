@@ -1,6 +1,6 @@
-<span>
+<div class="col-md-4">
              <!-- Blog Search Well -->
-             <div class="card border-light">
+             <div class="card border-light" style="width: 100%;">
                     <div class="card-body">
                     <h4 class="card-title">Blog Search</h4>
                         <form action="search.php" method="post">
@@ -16,7 +16,7 @@
                     </div>
              </div>
               <!-- Login -->
-              <div class="card border-light">
+              <div class="card border-light ">
                  <div class="card-body">
                  <h4 class="card-title">Login</h4>
                     <form action="includes/login.php" method="post">
@@ -29,11 +29,11 @@
                             <div class='invalid-feedback'><?php echo $_SESSION['password_err'] ?></div>
                         </div>
                            <div class="col">
-                               <button name="login" value ="Login" class = "btn btn-success btn-block">Login</button>
+                               <button name="login" value ="Login" class = "btn btn-primary btn-block">Login</button>
                            </div>
                            <hr>
                            <div class="col">
-                               <a href="registration.php" class = "btn btn-light btn-block">No account? Register</a>
+                               <a href="registration.php" class = "btn btn-block">No account? Register</a>
                            </div>
                     </form>
                  </div>
@@ -66,4 +66,4 @@
                 <!-- card-body -->
              </div>
              <!-- card -->
-</span>
+</div>

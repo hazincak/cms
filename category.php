@@ -48,7 +48,7 @@
                             <hr>
                             <div class="row justify-content-center">
                                 <div class="col-6 text-center">
-                                    <a class="btn btn-primary btn-block" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <a class="btn-full btn-block" href="post.php?p_id=<?php echo $post_id?>">Read More</a>
                                 </div>
                             </div>
                           </div>

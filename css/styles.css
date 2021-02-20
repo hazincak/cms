@@ -1,3 +1,21 @@
+
+html	{
+
+  --main-page-color: #e67e22;
+  --main-page-color-hover: #ed9e58;
+  background-color: #fff;
+  color: #555;
+ 
+
+}
+body{
+  font-family: 'Lato', 'Arial', 'sans-serif';
+  font-weight: 300;
+  font-size: 20px;
+  text-rendering: optimizeLegibility;
+}
+
+
 .pager li .active_link{
     background: #0275d8;
     color: #fff;
@@ -22,3 +40,140 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+
+  
+
+
+  
+/*----------------------------------------------------------------------------------------------------------*/
+/* HEADINGS */
+/*----------------------------------------------------------------------------------------------------------*/
+h1, 
+h2,
+h3{
+  font-weight: 300;
+  text-transform: uppercase;
+  
+  
+}
+
+h1{
+  margin: 0;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 240%;
+      word-spacing: 4px;
+      letter-spacing: 1px;
+}	
+
+h2{
+    font-size: 180%;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 30px; 
+      letter-spacing: 1px;
+}	
+
+h2:after{
+  display: block;
+  height: 2px;
+  background-color: var(--main-page-color);
+  content: " ";
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+h3{
+  font-size: 110%;
+  margin-bottom: 15px;
+}
+
+i{
+  color: #e67e22;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* LINKS */
+/*----------------------------------------------------------------------------------------------------------*/
+
+.nav-link{
+  font-weight: 400;
+  color: black;
+}
+.nav-link:hover{
+  color: var(--main-page-color);
+}
+
+a:link,
+a:visited {
+  font-weight: 400;
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,
+a:active{
+  color: #555;
+  border-bottom: 1px solid var(--main-page-color);
+}
+
+
+/*----------------------------------------------------------------------------------------------------------*/
+/* buttons */
+/*----------------------------------------------------------------------------------------------------------*/
+
+.btn-primary{
+  background-color: var(--main-page-color);
+  border-color: var(--main-page-color);
+}
+.btn-primary:hover{
+  background-color: var(--main-page-color-hover);
+  border-color: var(--main-page-color-hover);
+}
+.btn-primary:disabled{
+  background-color: var(--main-page-color);
+  border-color: var(--main-page-color);
+}
+
+
+/*Small tablet to big tablet : from 1023px to 1200px*/
+@media only screen and (max-width: 1200px){
+
+
+
+}
+
+
+/*Small tablet to big tablet : from 767px to 1023px*/
+@media only screen and (max-width: 1023px){
+  body{font-size: 16px;}
+
+  
+
+}
+
+
+/*Small phones to small tablets : from 481px to 767px*/
+@media only screen and (max-width: 767px){
+  body{font-size: 16px;}
+
+
+}
+
+
+/*Small phones : from 0 to 480px*/
+@media only screen and (max-width: 480px){
+
+}
+
+
+
+
+
+
+
+
