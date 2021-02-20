@@ -187,7 +187,7 @@ if(isset($_POST['create_post'])){
       $('.js--add-ingredient-button').click(function(){
         $('.js--ingredients-block').append(`
         <div class="col-md-12 form-group">
-            <label>Ingredient amount description</label>
+            <label>Ingredient amount and description</label>
             <input 
               type="text"
               class="form-control" 

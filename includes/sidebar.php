@@ -19,7 +19,7 @@
               <div class="card border-light ">
                  <div class="card-body">
                  <h4 class="card-title">Login</h4>
-                    <form action="includes/login.php" method="post">
+                    <form action="includes/login.php" method="post" autocomplete="off">
                         <div class="form-group">
                             <input name="username" type="text" class="form-control <?php echo (!empty($_SESSION['username_err'])) ? 'is-invalid' : ''; ?>" placeholder = "Enter Username">
                             <span class='invalid-feedback'><?php echo $_SESSION['username_err'] ?></span>

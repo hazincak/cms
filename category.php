@@ -21,8 +21,22 @@
             </h1>
                     <?php 
 
+                        $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id AND post_status = 'published'";
+                        $select_all_published_posts = mysqli_query($connection, $query);
+                        if(mysqli_num_rows($select_all_published_posts) ==0){
+                            echo "
+                            <div class='jumbotron text-center '>
+                              <h3 class=' text-dark'>$post_category_name category doesn't contain any published recipes!</h3>
+                              <p class='lead'>Your recipe will be published soon. </p>
+                            </div>
+                            
+                            ";
+                        }else{
+                            
                         $query = "SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.post_user_id=users.user_id WHERE post_category_id = $post_category_id";
                         $select_all_posts_query = mysqli_query($connection, $query);
+
+
                         while($row = mysqli_fetch_assoc($select_all_posts_query)){
                             $post_title = $row["post_title"];
                             $post_id = $row["post_id"];
@@ -34,8 +48,6 @@
                             $post_content = substr($row["post_content"],0,150);
                             if($post_status == 'published'){
                             ?>
-                            
-                 
                             <div class="card mt-2" style="width: 100%;">
                           <img class="card-img-tom" src="images/<?php echo $post_image?>" alt="">
                           <div class="card-body">
@@ -54,7 +66,11 @@
                           </div>
                         </div>
                        
-                        <?php } }?>
+                        <?php } }   }?>
+                        
+                        
+                        
+
                
             </div>
 
