@@ -36,30 +36,32 @@ if(isset($_POST['create_draft_post'])){
     confirm($create_post_query);
     $the_post_id = mysqli_insert_id($connection);//pulls out last created ID.
 
-    $trimmed_images = array_map('trim', $_FILES['file']['name']);
      // Count total files
-     $countfiles = count($trimmed_images);
+     $countfiles = count($_FILES['file']['name']);
 
-    
      // Looping all files
      for($i=0;$i<$countfiles;$i++){
       $filename = $_FILES['file']['name'][$i];
       // Upload file
-      move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
-      $query = "INSERT INTO images (image_name, image_post_id)";
-      $query .= "VALUES('{$filename}','{$the_post_id}')";
-      $attach_image_query = mysqli_query($connection, $query);
-      confirm($attach_image_query);
+      if($filename != ""){
+        move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
+        $query = "INSERT INTO images (image_name, image_post_id)";
+        $query .= "VALUES('{$filename}','{$the_post_id}')";
+        $attach_image_query = mysqli_query($connection, $query);
+        confirm($attach_image_query);
+      }
      }
 
     $ingredients = $_POST['ingredient'];
-    $trimmed_array = array_map('trim', $ingredients);
-    foreach($trimmed_array as $ingredient){
+    foreach($ingredients as $ingredient){
       $ingredient_description = $ingredient;
-      $query = "INSERT INTO ingredients (ingredient_description, ingredient_post_id)";
-      $query .= "VALUES('{$ingredient_description}','{$the_post_id}')"; 
-      $attach_ingredients_query = mysqli_query($connection, $query);
-      confirm($attach_ingredients_query);
+      if($ingredient_description != ""){
+        $query = "INSERT INTO ingredients (ingredient_description, ingredient_post_id)";
+        $query .= "VALUES('{$ingredient_description}','{$the_post_id}')"; 
+        $attach_ingredients_query = mysqli_query($connection, $query);
+        confirm($attach_ingredients_query);
+      }
+   
     }
     echo "<div class='alert alert-success' role='alert'>
             Your post has been created and submitted for approval.
@@ -189,7 +191,7 @@ if(isset($_POST['create_draft_post'])){
     let index = 0;
 
       $('.js--add-image-button').click(function(){
-        $('.js--image-block').append('<input class="form-control-file m-2" type="file" name="file[]"/>')
+        $('.js--image-block').append('<input class="form-control-file mt-2" type="file" name="file[]"/>')
       });
 
       $('.js--add-ingredient-button').click(function(){

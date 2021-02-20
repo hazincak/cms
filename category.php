@@ -36,7 +36,7 @@
                             ?>
                             
                  
-                            <div class="card" style="width: 100%;">
+                            <div class="card mt-2" style="width: 100%;">
                           <img class="card-img-tom" src="images/<?php echo $post_image?>" alt="">
                           <div class="card-body">
                             <h5 class="card-title text-center"><a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title?></a></h5>

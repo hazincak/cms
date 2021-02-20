@@ -58,21 +58,25 @@ if(isset($_POST['update_post'])){
     for($i=0;$i<$countfiles;$i++){
     $filename = $_FILES['file']['name'][$i];
     // Upload file
-    move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
-    $query = "INSERT INTO images (image_name, image_post_id)";
-    $query .= "VALUES('{$filename}','{$the_post_id}')";
-    $attach_image_query = mysqli_query($connection, $query);
-    confirm($attach_image_query);
+    if($filename != ""){
+        move_uploaded_file($_FILES['file']['tmp_name'][$i],'images/postImages/'.$filename);
+        $query = "INSERT INTO images (image_name, image_post_id)";
+        $query .= "VALUES('{$filename}','{$the_post_id}')";
+        $attach_image_query = mysqli_query($connection, $query);
+        confirm($attach_image_query);
+    }
   }
 
-  $ingredients = $_POST['ingredient'];
-    $trimmed_array = array_map('trim', $ingredients);
-    foreach($trimmed_array as $ingredient){
+    $ingredients = $_POST['ingredient'];
+    foreach($ingredients as $ingredient){
         $ingredient_description = $ingredient;
-        $query = "INSERT INTO ingredients (ingredient_description, ingredient_post_id)";
-        $query .= "VALUES('{$ingredient_description}','{$the_post_id}')"; 
-        $attach_ingredients_query = mysqli_query($connection, $query);
-        confirm($attach_ingredients_query);
+        if($ingredient_description != ""){
+            $query = "INSERT INTO ingredients (ingredient_description, ingredient_post_id)";
+            $query .= "VALUES('{$ingredient_description}','{$the_post_id}')"; 
+            $attach_ingredients_query = mysqli_query($connection, $query);
+            confirm($attach_ingredients_query);
+        }
+        
   }
 
    $query ="UPDATE posts SET ";

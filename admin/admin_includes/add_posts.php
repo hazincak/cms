@@ -32,11 +32,13 @@ if(isset($_POST['create_post'])){
     for($i=0;$i<$countfiles;$i++){
     $filename = $_FILES['file']['name'][$i];
     // Upload file
-    move_uploaded_file($_FILES['file']['tmp_name'][$i],'../images/postImages/'.$filename);
-    $query = "INSERT INTO images (image_name, image_post_id)";
-    $query .= "VALUES('{$filename}','{$the_post_id}')";
-    $attach_image_query = mysqli_query($connection, $query);
-    confirm($attach_image_query);
+    if($filename != ""){
+      move_uploaded_file($_FILES['file']['tmp_name'][$i],'../images/postImages/'.$filename);
+      $query = "INSERT INTO images (image_name, image_post_id)";
+      $query .= "VALUES('{$filename}','{$the_post_id}')";
+      $attach_image_query = mysqli_query($connection, $query);
+      confirm($attach_image_query);
+    }
   }
 
     $ingredients = $_POST['ingredient'];

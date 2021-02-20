@@ -72,7 +72,7 @@ while($row = mysqli_fetch_assoc($select_all_posts_query)){
                                       <a class='thumbnail' href='#' data-image-id='' data-toggle='modal' data-title=''
                                          data-image='images/postImages/$image_name'
                                          data-target='#image-gallery'>
-                                          <img class='img-fluid img-thumbnail' style='min-height: 90px; min-width: 180px'
+                                          <img class='img-fluid img-thumbnail' style='width: 80%; height: 80%'
                                                src='images/postImages/$image_name'
                                                alt='Another alt text'>
                                       </a>
