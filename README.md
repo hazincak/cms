@@ -18,8 +18,10 @@ Then, start the Apache and MySQL modules in your XAMPP Control Panel and access 
 
 ### Admin
 username: admin
+
 password: password
 
 ### User
 username: user
+
 password: password
