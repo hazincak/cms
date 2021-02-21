@@ -13,3 +13,13 @@ This website keeps its data in a SQL relational database. Therefore, its tables 
 Before running this website, copy and paste the *cms* folder to the *htdocs* folder located in your XAMPP folder. The usual path for the Windows 10 users is *C:\xampp\htdocs*.
 
 Then, start the Apache and MySQL modules in your XAMPP Control Panel and access this website *http://localhost/cms/index.php* from your browser window. 
+
+## Logging credentials
+
+### Admin
+username: admin
+password: password
+
+### User
+username: user
+password: password
