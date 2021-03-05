@@ -26,6 +26,6 @@ function loadUsersOnline(){
 
 setInterval(function(){
     loadUsersOnline();
-}, 5000);
+}, 4000);
 
 
